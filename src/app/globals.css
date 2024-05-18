@@ -28,6 +28,22 @@ body {
 
 @layer utilities {
   .text-balance {
-    text-wrap: balance;
+    text-wrap: balance,
   }
+}
+
+/* Add this to your existing CSS (e.g., in a separate stylesheet or using styled components) */
+.navbar-container { /* Assuming you've added this class to your main <div> */
+  display: flex;
+  justify-content: space-between; /* Pushes logo to left, other items to right */
+  align-items: center;  /* Vertically centers all items */
+}
+
+.logo-container { /* Wrap your logo image in a <div> with this class */
+  margin-left: 1rem;   /* Add left margin for visual spacing */
+}
+
+.menu-container { /* Wrap the Menu component in a <div> with this class */
+  display: flex;
+  justify-content: center; /* Centers menu items horizontally */
 }

@@ -1,0 +1,94 @@
+{
+  "aiCatalog": [
+    {
+      "id": 1,
+      "title": "Introduction to AI",
+      "slug": "introduction-to-ai",
+      "description": "Get started with the basics of artificial intelligence and machine learning.",
+      "instructor": "John Doe",
+      "isFeatured": true,
+      "image": "https://via.placeholder.com/300?text=Introduction+to+AI"
+    },
+    {
+      "id": 2,
+      "title": "Machine Learning Fundamentals",
+      "slug": "machine-learning-fundamentals",
+      "description": "Learn the fundamental concepts and techniques of machine learning.",
+      "instructor": "Jane Smith",
+      "isFeatured": false,
+      "image": "https://via.placeholder.com/300?text=Machine+Learning+Fundamentals"
+    },
+    {
+      "id": 3,
+      "title": "Advanced AI Techniques",
+      "slug": "advanced-ai-techniques",
+      "description": "Dive deeper into advanced AI techniques for more complex applications.",
+      "instructor": "Emily Johnson",
+      "isFeatured": true,
+      "image": "https://via.placeholder.com/300?text=Advanced+AI+Techniques"
+    },
+    {
+      "id": 4,
+      "title": "Natural Language Processing",
+      "slug": "natural-language-processing",
+      "description": "Master the techniques of processing and analyzing natural language data.",
+      "instructor": "Mike Brown",
+      "isFeatured": false,
+      "image": "https://via.placeholder.com/300?text=Natural+Language+Processing"
+    },
+    {
+      "id": 5,
+      "title": "AI in Healthcare",
+      "slug": "ai-in-healthcare",
+      "description": "Explore how AI is transforming the healthcare industry with practical applications.",
+      "instructor": "Chris Davis",
+      "isFeatured": false,
+      "image": "https://via.placeholder.com/300?text=AI+in+Healthcare"
+    },
+    {
+      "id": 6,
+      "title": "Prompt Engineering for AI",
+      "slug": "prompt-engineering-for-ai",
+      "description": "Learn the art of crafting effective prompts to optimize AI outputs.",
+      "instructor": "Alex Wilson",
+      "isFeatured": true,
+      "image": "https://via.placeholder.com/300?text=Prompt+Engineering+for+AI"
+    },
+    {
+      "id": 7,
+      "title": "AI Ethics and Society",
+      "slug": "ai-ethics-and-society",
+      "description": "Understand the ethical implications and societal impact of AI technologies.",
+      "instructor": "Samantha Miller",
+      "isFeatured": false,
+      "image": "https://via.placeholder.com/300?text=AI+Ethics+and+Society"
+    },
+    {
+      "id": 8,
+      "title": "AI for Business",
+      "slug": "ai-for-business",
+      "description": "Learn how to leverage AI to drive business innovation and efficiency.",
+      "instructor": "Luke Harris",
+      "isFeatured": true,
+      "image": "https://via.placeholder.com/300?text=AI+for+Business"
+    },
+    {
+      "id": 9,
+      "title": "AI Blog Writing",
+      "slug": "ai-blog-writing",
+      "description": "Create compelling and informative AI-related blog content.",
+      "instructor": "Grace Lee",
+      "isFeatured": true,
+      "image": "https://via.placeholder.com/300?text=AI+Blog+Writing"
+    },
+    {
+      "id": 10,
+      "title": "Deep Learning with Python",
+      "slug": "deep-learning-with-python",
+      "description": "Implement deep learning models using Python and popular libraries.",
+      "instructor": "Ethan Moore",
+      "isFeatured": true,
+      "image": "https://via.placeholder.com/300?text=Deep+Learning+with+Python"
+    }
+  ]
+}
