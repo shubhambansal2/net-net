@@ -15,7 +15,7 @@ const HeroSection = () => {
                 <div className="p-4 relative z-10 w-full text-center ">
                     <h1 className="mt-20 md:mt-0 text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400"
                     >ERA OF AI WITH BLUEBERRY</h1>
-                    <p className="mt-4 font-normal text-base md:text-lg text-neutral-300 max-w-lg mx-auto">BlueBerry is a leading technology company specializing in custom AI solutions for various industries. </p>
+                    <p className="mt-4 font-normal text-base md:text-lg text-neutral-300 max-w-lg mx-auto">BlueBerry is a leading technology company specializing in custom AI solutions for various industries like e-commerce, finance etc. </p>
                 </div>
                 <div>
                     <Button
