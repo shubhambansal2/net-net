@@ -7,15 +7,20 @@ interface resp {
 }
 
 export default async function Response(input: string) {
-
     try {
+        const client = await Client.connect("Shubhambansal2/mistralai-Mixtral-8x7B-Instruct-v0.1");
+        const result = await client.predict("/predict", { 		
+                        param_0: input,
+        });
+        console.log(result.data);
+        return result.data[0]
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
 
-        const app = await Client.connect("https://mixcard-text-finbert.hf.space/");
-        const result = await app.predict("/predict", [
-            input,
-        ]);
-
-        // const result = await app.predict("/predict", [
+   // const result = await app.predict("/predict", [
         //     exampleImage, 	// blob in 'image' Image component
         // ]);
         // console.log("########");
@@ -30,10 +35,3 @@ export default async function Response(input: string) {
         // console.log(response);
         // console.log("~~~~~~");
         // @ts-ignore
-        return result.data[0].label;
-    } catch (error) {
-        console.log(error);
-        throw error;
-    }
-}
-
