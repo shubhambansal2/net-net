@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Response from "@/app/projects/chatbot/Response";
+import Head from '@/app/head';
 
 export default function ChatbotPage() {
     const [inputValue, setInputValue] = useState('');
@@ -52,6 +53,8 @@ export default function ChatbotPage() {
     }, [result]);
 
     return (
+        <>
+        <Head/>
         <main className="flex min-h-screen flex-col items-center justify-center p-12 relative">
             <h1 className="text-5xl font-bold mb-2 text-center">Let&#39;s build a story</h1>
 
@@ -91,5 +94,6 @@ export default function ChatbotPage() {
                 }
             `}</style>
         </main>
+        </>
     );
 }
