@@ -53,7 +53,7 @@ export default function ChatbotPage() {
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-center p-12 relative">
-            <h1 className="text-5xl font-bold mb-2 text-center">Let's build a story</h1>
+            <h1 className="text-5xl font-bold mb-2 text-center">Let&#39;s build a story</h1>
 
             <form onSubmit={handleSubmit}>
                 <input

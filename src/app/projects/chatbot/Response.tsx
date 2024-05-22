@@ -12,7 +12,9 @@ export default async function Response(input: string) {
         const result = await client.predict("/predict", { 		
                         param_0: input,
         });
+        // @ts-ignore
         console.log(result.data);
+        // @ts-ignore
         return result.data[0]
     } catch (error) {
         console.log(error);
