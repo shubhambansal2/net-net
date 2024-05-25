@@ -56,13 +56,13 @@ export default function ChatbotPage() {
         <>
         <Head/>
         <main className="flex min-h-screen flex-col items-center justify-center p-12 relative">
-            <h1 className="text-5xl font-bold mb-2 text-center">Let&#39;s build a story</h1>
+            <h1 className="text-5xl font-bold mb-2 text-center">Ask me Anything</h1>
 
             <form onSubmit={handleSubmit}>
                 <input
                     className="w-full max-w-xs p-2 border border-gray-300 rounded mb-4 text-black"
                     type="text"
-                    placeholder="Start your story..."
+                    placeholder="Type here..."
                     value={inputValue}
                     onChange={handleChange}
                 />
