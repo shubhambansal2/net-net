@@ -4,6 +4,11 @@ import {useEffect, useRef, useState} from 'react'
 import Response from "@/app/projects/chatbot/Response";
 import Head from '@/app/head';
 
+// Generate a new session_id on page load
+let sessionId = 'A' + Math.floor(Math.random() * 1000000);
+
+console.log(sessionId)
+
 export default function ChatbotPage() {
     const [inputValue, setInputValue] = useState('');
     const [result, setResult] = useState<string | null>(null);
@@ -13,13 +18,13 @@ export default function ChatbotPage() {
     const [conversation, setConversation] = useState<{ question: string, answer: string | null }[]>([]);
     const lastQuestionRef = useRef<HTMLDivElement>(null);
     const chatContainerRef = useRef<HTMLDivElement>(null);
-
+   
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setIsLoading(true);
         setDisplayedResult('');
         try {
-            const response = await Response(inputValue); // Pass inputValue to Response function
+            const response = await Response(inputValue,sessionId); // Pass inputValue to Response function
             setResult(response);
             // setHistory(prevHistory => [...prevHistory, { question: inputValue, answer: response }]);
             setConversation(prevConversation => [...prevConversation, { question: inputValue, answer: response }]);
@@ -35,22 +40,22 @@ export default function ChatbotPage() {
         setInputValue(event.target.value);
     };
 
-    const handleClear = () => {
-        setInputValue('');
-        setResult(null);
-        setDisplayedResult('');
-        // setIsLoading(false);
-    };
+    // const handleClear = () => {
+    //     setInputValue('');
+    //     setResult(null);
+    //     setDisplayedResult('');
+    //     // setIsLoading(false);
+    // };
 
     useEffect(() => {
         if (result) {
-            console.log("Starting to display result:", result);
+            // console.log("Starting to display result:", result);
             let index = 0;
             let currentDisplayedResult = ''; // Use a local variable to store the current displayed result
             const interval = setInterval(() => {
                 currentDisplayedResult += result[index];
                 setDisplayedResult(currentDisplayedResult);
-                console.log("Updating displayedResult:", currentDisplayedResult);
+                // console.log("Updating displayedResult:", currentDisplayedResult);
                 index++;
                 if (index === result.length) {
                     clearInterval(interval);
@@ -101,8 +106,6 @@ export default function ChatbotPage() {
             {/*    ))}*/}
             {/*</div>*/}
 
-
-
             <form onSubmit={handleSubmit}>
                 <input
                     className="w-full max-w-xs p-2 border border-gray-300 rounded mb-4 text-black"
@@ -114,9 +117,9 @@ export default function ChatbotPage() {
                 <button type="submit" className="bg-emerald-600 w-full max-w-xs p-2 border border-gray-300 rounded mb-4 text-black">
                     Submit
                 </button>
-                <button type="button" onClick={handleClear} className="bg-emerald-600 w-full max-w-xs p-2 border border-gray-300 rounded mb-4 text-black">
+                {/* <button type="button" onClick={handleClear} className="bg-emerald-600 w-full max-w-xs p-2 border border-gray-300 rounded mb-4 text-black">
                     Clear
-                </button>
+                </button> */}
             </form>
             <h1 className="text-5xl font-bold mb-2 text-center">Ask me Anything</h1>
             {isLoading && (
