@@ -7,11 +7,12 @@ interface resp {
 
 }
 
-export default async function Response(input: string) {
+export default async function Response(input: string, sessionId: string) {
     try {
       // Make a POST request to your Flask app on Heroku
       const response = await axios.post('https://desolate-bastion-55476-3d3016c3fa1a.herokuapp.com/chat', {
         text: input,
+        session_id: sessionId
       });
       // Return the response from your Flask app
       // @ts-ignore

@@ -1,26 +1,38 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import {useEffect, useRef, useState} from 'react'
 import Response from "@/app/projects/chatbot/Response";
 import Head from '@/app/head';
+
+// Generate a new session_id on page load
+let sessionId = 'A' + Math.floor(Math.random() * 1000000);
+
+console.log(sessionId)
 
 export default function ChatbotPage() {
     const [inputValue, setInputValue] = useState('');
     const [result, setResult] = useState<string | null>(null);
     const [displayedResult, setDisplayedResult] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-
+    // const [history, setHistory] = useState<{ question: string, answer: string }[]>([]);
+    const [conversation, setConversation] = useState<{ question: string, answer: string | null }[]>([]);
+    const lastQuestionRef = useRef<HTMLDivElement>(null);
+    const chatContainerRef = useRef<HTMLDivElement>(null);
+   
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setIsLoading(true);
         setDisplayedResult('');
         try {
-            const response = await Response(inputValue); // Pass inputValue to Response function
+            const response = await Response(inputValue,sessionId); // Pass inputValue to Response function
             setResult(response);
+            // setHistory(prevHistory => [...prevHistory, { question: inputValue, answer: response }]);
+            setConversation(prevConversation => [...prevConversation, { question: inputValue, answer: response }]);
         } catch (error) {
             console.error("Error fetching response:", error);
         } finally {
             setIsLoading(false);
+            setInputValue('');
         }
     };
 
@@ -28,21 +40,22 @@ export default function ChatbotPage() {
         setInputValue(event.target.value);
     };
 
-    const handleClear = () => {
-        setInputValue('');
-        setResult(null);
-        setDisplayedResult('');
-    };
+    // const handleClear = () => {
+    //     setInputValue('');
+    //     setResult(null);
+    //     setDisplayedResult('');
+    //     // setIsLoading(false);
+    // };
 
     useEffect(() => {
         if (result) {
-            console.log("Starting to display result:", result);
+            // console.log("Starting to display result:", result);
             let index = 0;
             let currentDisplayedResult = ''; // Use a local variable to store the current displayed result
             const interval = setInterval(() => {
                 currentDisplayedResult += result[index];
                 setDisplayedResult(currentDisplayedResult);
-                console.log("Updating displayedResult:", currentDisplayedResult);
+                // console.log("Updating displayedResult:", currentDisplayedResult);
                 index++;
                 if (index === result.length) {
                     clearInterval(interval);
@@ -52,11 +65,46 @@ export default function ChatbotPage() {
         }
     }, [result]);
 
+    useEffect(() => {
+        if (chatContainerRef.current) {
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        }
+    }, [conversation]);
+
     return (
         <>
         <Head/>
-        <main className="flex min-h-screen flex-col items-center justify-center p-12 relative">
-            <h1 className="text-5xl font-bold mb-2 text-center">Ask me Anything</h1>
+        <main className="flex flex-col items-center justify-center p-12 relative">
+
+            <div ref={chatContainerRef} className="chat-history mt-4 w-full h-96 overflow-y-scroll">
+                {conversation.map((item, index) => (
+                    <div key={index} className="flex flex-col items-center mb-2">
+                        <div className="question p-4 rounded text-white mb-4 bg-blue-400 shadow-md self-end">
+                            {item.question}
+                        </div>
+                        {item.answer && (
+                            <div className="answer p-4 rounded text-white mb-4 bg-green-400 shadow-md self-start">
+                                {item.answer}
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </div>
+
+            {/*<div className="chat-history mt-4 w-full max-w-xs">*/}
+            {/*    {conversation.map((item, index) => (*/}
+            {/*        <div key={index} ref={index === conversation.length - 1 ? lastQuestionRef : null} className="flex flex-row justify-start items-center mb-2 overflow-y-scroll">*/}
+            {/*            <div className="question p-4 rounded text-white mb-4 bg-blue-400 shadow-md ml-auto">*/}
+            {/*                {item.question}*/}
+            {/*            </div>*/}
+            {/*            {item.answer && (*/}
+            {/*                <div className="answer p-4 rounded text-white mb-4 bg-green-400 shadow-md mr-auto">*/}
+            {/*                    {item.answer}*/}
+            {/*                </div>*/}
+            {/*            )}*/}
+            {/*        </div>*/}
+            {/*    ))}*/}
+            {/*</div>*/}
 
             <form onSubmit={handleSubmit}>
                 <input
@@ -69,11 +117,11 @@ export default function ChatbotPage() {
                 <button type="submit" className="bg-emerald-600 w-full max-w-xs p-2 border border-gray-300 rounded mb-4 text-black">
                     Submit
                 </button>
-                <button type="button" onClick={handleClear} className="bg-emerald-600 w-full max-w-xs p-2 border border-gray-300 rounded mb-4 text-black">
+                {/* <button type="button" onClick={handleClear} className="bg-emerald-600 w-full max-w-xs p-2 border border-gray-300 rounded mb-4 text-black">
                     Clear
-                </button>
+                </button> */}
             </form>
-
+            <h1 className="text-5xl font-bold mb-2 text-center">Ask me Anything</h1>
             {isLoading && (
                 <div className="flex items-center justify-center mt-4">
                     <div className="loader border-t-4 border-blue-500 rounded-full w-8 h-8 animate-spin"></div>
@@ -81,18 +129,27 @@ export default function ChatbotPage() {
                 </div>
             )}
 
-            {!isLoading && result && (
-                <div className="chat-response p-4 rounded text-white mt-4 bg-blue-400 shadow-md">
-                <p>{displayedResult}</p>
-                </div>
-            )}
+            {/*{!isLoading && result && (*/}
+            {/*    <div className="chat-response p-4 rounded text-white mt-4 bg-blue-400 shadow-md">*/}
+            {/*    <p>{displayedResult}</p>*/}
+            {/*    </div>*/}
+            {/*)}*/}
+
+
+
 
             <style jsx>{`
-                .loader {
-                    border-top-color: transparent;
-                    border-width: 4px;
-                }
-            `}</style>
+                    .loader {
+                        border-top-color: transparent;
+                        border-width: 4px;
+                    }
+                    .question {
+                        align-self: flex-end;
+                    }
+                    .answer {
+                        align-self: flex-start;
+                    }
+                `}</style>
         </main>
         </>
     );
