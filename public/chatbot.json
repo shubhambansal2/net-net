@@ -1,0 +1,15 @@
+{
+  "chatbots": {
+    "E-commerce": {
+      "role": ["Chatbot assistant", "Customer Care Support"],
+      "query": ["Ques1", "Ques2" ,"What's your name", "Tell me about the black hole and how it is related to earth"]
+    },
+    "Fintech": {
+      "role": ["Chatbot assistant", "Customer Care Support"]
+    },
+    "default": {
+      "role": ["Chatbot assistant", "Customer Care Support"],
+      "query": ["Ques123", "Ques2323" ,"What's your name my buddy", "Tell me about the black hole and how it is related to earth"]
+    }
+  }
+}
