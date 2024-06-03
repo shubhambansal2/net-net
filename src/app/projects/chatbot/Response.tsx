@@ -7,11 +7,11 @@ interface resp {
 
 }
 
-export default async function Response(input: string, sessionId: string, industry: string | null, role: string | null) {
+export default async function Response(input: string, sessionId: string, industry: string | null, role: string | null, rag: boolean | false) {
     try {
 
         // Prepare the payload with mandatory fields
-        const payload: { text: string, session_id: string, industry?: string, role?: string } = {
+        const payload: { text: string, session_id: string, industry?: string, role?: string , is_rag?: boolean} = {
             text: input,
             session_id: sessionId
         };
@@ -22,6 +22,9 @@ export default async function Response(input: string, sessionId: string, industr
         }
         if (role) {
             payload.role = role;
+        }
+        if (rag) {
+            payload.is_rag = rag;
         }
       // Make a POST request to your Flask app on Heroku
       const response = await axios.post('https://desolate-bastion-55476-3d3016c3fa1a.herokuapp.com/chat', payload);

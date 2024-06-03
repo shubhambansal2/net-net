@@ -33,6 +33,7 @@ const Chat = () => {
     const [showCards, setShowCards] = useState(true);
     const [isSubmittingFromCard, setIsSubmittingFromCard] = useState(false);
     const [data, setData] = useState<Data>({ chatbots: {} });
+    const [rag, setRag] = useState<boolean> (false); // RAG status
 
 
     useEffect(() => {
@@ -85,6 +86,12 @@ const Chat = () => {
         setSelectedRole(event.target.value);
     };
 
+    const handleRagChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setRag(event.target.value === 'true');
+        sessionId = 'A' + Math.floor(Math.random() * 1000000);
+        console.log("New session ID for changing RAG Status:", sessionId);
+    }
+
     const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
         // event.preventDefault();
         console.log("Input vlaue: ", inputValue)
@@ -96,7 +103,7 @@ const Chat = () => {
         setShowCards(false);
 
         try {
-            const response = await Response(inputValue,sessionId, selectedIndustry, selectedRole); // Pass inputValue to Response function
+            const response = await Response(inputValue,sessionId, selectedIndustry, selectedRole, rag); // Pass inputValue to Response function
             setResult(response);
             // setHistory(prevHistory => [...prevHistory, { question: inputValue, answer: response }]);
             setConversation(prevConversation => [...prevConversation, { question: inputValue, answer: response }]);
@@ -137,6 +144,7 @@ const Chat = () => {
         await handleSubmit();
     };
 
+
     return (
         <>
             <div className="chatbot-page flex md:flex-row grid-cols-2 justify-center" >
@@ -162,7 +170,14 @@ const Chat = () => {
                             ))}
                         </select>
                     </div>
-
+                    <div>
+                        <label htmlFor="rag">RAG Status: </label>
+                        <select id="rag" onChange={handleRagChange}>
+                            <option value="">--Select RAG Status--</option>
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                        </select>
+                    </div>
                     {/*</div>*/}
                 </div>
 
