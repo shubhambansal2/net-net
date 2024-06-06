@@ -1,33 +1,42 @@
-/* styles.css */
+/* style.css
 
-/*.navbar {*/
-/*    background-color: white;*/
-/*    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
-/*}*/
+header {
+    backdrop-filter: blur(10px);
+}
 
-/*.nav-link {*/
-/*    font-size: 1.125rem; !* text-lg *!*/
-/*    font-weight: 600; !* font-semibold *!*/
-/*    transition: color 0.3s ease;*/
-/*}*/
+nav a {
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-/*.nav-link:hover {*/
-/*    color: #3b82f6; !* blue-500 *!*/
-/*}*/
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
-/*.dropdown-content {*/
-/*    display: none;*/
-/*    position: absolute;*/
-/*    background-color: white;*/
-/*    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
-/*    padding: 1rem;*/
-/*    margin-top: 0.5rem;*/
-/*    flex-direction: column;*/
-/*    gap: 1rem;*/
-/*    font-size: 0.875rem;*/
-/*}*/
+.menu-item:hover .menu-content {
+    display: block;
+}
 
-/*.dropdown:hover .dropdown-content {*/
-/*    display: flex;*/
-/*}*/
+.menu-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 10;
+}
 
+.menu-item:hover .menu-content a {
+    color: black;
+    padding: 12px 16px;
+    display: block;
+}
+
+.menu-item:hover .menu-content a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+} */
