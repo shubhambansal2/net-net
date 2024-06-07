@@ -147,10 +147,11 @@ const Chat = () => {
 
     return (
         <>
-            <div className="chatbot-page flex md:flex-row grid-cols-2 justify-center" >
+            <div className="chatbot-page flex h-screen">
                 {/*sidebar*/}
+                {/* flex md:flex-row grid-cols-2 justify-center pt-15 h-screen*/}
                 <div className="sidebar px-5 space-y-8 text-center  bg-gray-100 py-10">
-                    {/*<div className="bg-white p-6 rounded-lg shadow-lg w-full mt-12 space-x-16 flex  text-center justify-center">*!/*/}
+
                     <div>
                         <label htmlFor="industry">Industry: </label>
                         <select id="industry" value={selectedIndustry} onChange={handleIndustryChange}>
@@ -182,8 +183,8 @@ const Chat = () => {
                 </div>
 
                 {/*chat box*/}
-                <div className="main-content w-full md:w-1/5 text-center  flex-1 border-2 border-black bg-blue-50 px-10">
-                    <div ref={chatContainerRef} className="chat-history mt-4 w-full h-96 overflow-y-scroll">
+                <div className="main-content w-full md:w-1/5 text-center flex-1 border-1 bg-blue-20 h-screen px-100">
+                    <div ref={chatContainerRef} className="chat-history mt-4 w-full h-full">
                         {conversation.map((item, index) => (
                             <div key={index} className="flex flex-col items-center mb-2">
                                 <div className="question p-4 rounded mb-4 shadow-md self-end bg-white">
@@ -235,18 +236,23 @@ const Chat = () => {
                     </div>
 
 
-                    <form onSubmit={handleSubmit} className="py-2 space-x-4">
-                        <input
-                            className="w-full max-w-xs p-2 border border-gray-300 rounded mb-4 text-black"
-                            type="text"
-                            placeholder="Type here..."
-                            value={inputValue}
-                            onChange={handleChange}
-                        />
-                        <button type="submit" className="bg-emerald-600 max-w-xs p-2 border border-gray-300 rounded mb-4 text-black">
-                            Submit
-                        </button>
+                    <div className="fixed bottom-0 left-40 right-0 bg-white p-3">
+                    <form onSubmit={handleSubmit} className="flex space-x-4">
+                    <input
+                        className="w-full p-2 border border-gray-300 rounded text-black"
+                        type="text"
+                        placeholder="Type here..."
+                        value={inputValue}
+                        onChange={handleChange}
+                    />
+                    <button
+                        type="submit"
+                        className="bg-emerald-600 p-2 border border-gray-300 rounded text-white"
+                    >
+                        Submit
+                    </button>
                     </form>
+                    </div>
                     {/*<h1 className="text-5xl font-bold mb-2 text-center">Ask me Anything</h1>*/}
                 </div>
             </div>

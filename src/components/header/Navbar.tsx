@@ -11,7 +11,7 @@ import '@/components/header/style.css';
 function Navbar() {
     const [active, setActive] = useState<string | null>(null);
     return (
-        <header className="fixed top-0 inset-x-0 bg-white shadow-md z-50">
+        <header className="fixed top-0 inset-x-0 bg-white shadow-md z-50 relative">
             <div className="w-full max-w-7xl mx-auto flex row-auto py-4">
                 <div className="flex-1">
                     <Link href="/">

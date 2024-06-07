@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -19,8 +20,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  showFooter = false,
 }: Readonly<{
   children: React.ReactNode;
+  showFooter?: boolean;
 }>) {
   return (
     <html lang="en">
@@ -30,9 +33,10 @@ export default function RootLayout({
             <Navbar/>
         </div>
         {children}
-        <div>
+        {showFooter && (<div> 
             <Footer/>
         </div>
+        )}
       </body>
     </html>
   );

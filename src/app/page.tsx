@@ -5,15 +5,13 @@ import HeroSection from "@/components/HeroSection";
 import FeatureSection from "@/components/FeatureSection";
 import Head from './head';
 import BlogSection from "@/components/Blogs";
-
+import RootLayout from "@/app/layout";
 
 export default function Home() {
     return (
         <>
-            <Head />
+            <Head/>
             <main className="min-h-screen antialiased bg-grid-white/[0.02]">
-                <HeroSection />
-                <HeroSection />
                 <HeroSection />
                 <HeroSection />
             </main>

@@ -5,13 +5,20 @@ import Response from "@/app/projects/chatbot/Response";
 import Head from '@/app/head';
 import data from '@/../public/chatbot.json'
 import Chat from '@/components/chatbot/chat'
+import RootLayout from '@/app/layout';
 
 // Generate a new session_id on page load
 let sessionId = 'A' + Math.floor(Math.random() * 1000000);
-
 console.log(sessionId)
-
 export default function ChatbotPage() {
+ 
+    return (
+        <>  
+            <Chat/>
+        </>
+    );
+}
+
     // const [inputValue, setInputValue] = useState('');
     // const [result, setResult] = useState<string | null>(null);
     // const [displayedResult, setDisplayedResult] = useState('');
@@ -81,11 +88,7 @@ export default function ChatbotPage() {
     //     setSelectedIndustry(industry);
     //     setRoles(industry ? data.chatbots[industry].role : []);
     // };
-
-    return (
-        <>
-            <Chat/>
-            {/*<Head/>*/}
+  {/*<Head/>*/}
             {/*<main className="flex flex-col items-center justify-center p-12 relative">*/}
             {/*    <div className="bg-white p-6 rounded-lg shadow-lg w-full mt-12 space-x-16 flex  text-center justify-center">*/}
             {/*        <div>*/}
@@ -170,6 +173,3 @@ export default function ChatbotPage() {
             {/*        }*/}
             {/*    `}</style>*/}
             {/*</main>*/}
-        </>
-    );
-}
