@@ -26,13 +26,10 @@ export default function RootLayout({
     <html lang="en">
 
       <body>
-        <div className={cn("relative w-full flex flex-col items-center justify-center", fontSans.variable) }>
+        {/*<div className={cn("relative w-full flex flex-col items-center justify-center", fontSans.variable) }>*/}
             <Navbar/>
-        </div>
+        {/*</div>*/}
         {children}
-        <div>
-            <Footer/>
-        </div>
       </body>
     </html>
   );

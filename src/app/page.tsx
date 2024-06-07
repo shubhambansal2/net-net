@@ -5,6 +5,7 @@ import HeroSection from "@/components/HeroSection";
 import FeatureSection from "@/components/FeatureSection";
 import Head from './head';
 import BlogSection from "@/components/Blogs";
+import Footer from "@/components/Footer";
 
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
                 <HeroSection />
                 <HeroSection />
             </main>
+            <Footer/>
         </>
     );
 }

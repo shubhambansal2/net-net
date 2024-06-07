@@ -147,9 +147,9 @@ const Chat = () => {
 
     return (
         <>
-            <div className="chatbot-page flex md:flex-row grid-cols-2 justify-center" >
+            <div className="chatbot-page flex flex-col md:flex-row justify-center" style={{ paddingTop: '60px' }} >
                 {/*sidebar*/}
-                <div className="sidebar px-5 space-y-8 text-center  bg-gray-100 py-10">
+                <div className="sidebar px-5 py-10 space-y-8 text-center  bg-gray-100  md:w-1/3 lg:w-1/4">
                     {/*<div className="bg-white p-6 rounded-lg shadow-lg w-full mt-12 space-x-16 flex  text-center justify-center">*!/*/}
                     <div>
                         <label htmlFor="industry">Industry: </label>
@@ -182,8 +182,8 @@ const Chat = () => {
                 </div>
 
                 {/*chat box*/}
-                <div className="main-content w-full md:w-1/5 text-center  flex-1 border-2 border-black bg-blue-50 px-10">
-                    <div ref={chatContainerRef} className="chat-history mt-4 w-full h-96 overflow-y-scroll">
+                <div className="main-content w-full md:w-2/3 lg:w-3/4 text-center flex-1 border-2 border-black bg-blue-50 px-10 ">
+                    <div ref={chatContainerRef} className="chat-history mt-4 h-96 overflow-y-scroll">
                         {conversation.map((item, index) => (
                             <div key={index} className="flex flex-col items-center mb-2">
                                 <div className="question p-4 rounded mb-4 shadow-md self-end bg-white">
