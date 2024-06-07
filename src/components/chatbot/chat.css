@@ -1,9 +1,9 @@
-/*.chatbot-page {*/
-/*    display: flex;*/
-/*    justify-content: space-between; !* Adjusts space between the divs *!*/
-/*    align-items: center;*/
-/*    min-height: 100vh;*/
-/*}*/
+.chatbot-page {
+    display: flex;
+    justify-content: space-between; /* Adjusts space between the divs */
+    align-items: center;
+    /*min-height: 100vh;*/
+}
 
 /*.sidebar {*/
 /*    width: 20% ;*/
