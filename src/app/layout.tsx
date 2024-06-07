@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -30,7 +31,10 @@ export default function RootLayout({
             <Navbar/>
         {/*</div>*/}
         {children}
+
       </body>
     </html>
   );
 }
+
+// new changes to be merged 

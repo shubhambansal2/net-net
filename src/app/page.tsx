@@ -5,20 +5,24 @@ import HeroSection from "@/components/HeroSection";
 import FeatureSection from "@/components/FeatureSection";
 import Head from './head';
 import BlogSection from "@/components/Blogs";
-import Footer from "@/components/Footer";
+import ConversationalCommerce from '@/components/conversationalmessage';
+// import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
+import { ThreeDCardDemo } from "@/components/ThreeDCardDemo";
 
+
+import Footer from "@/components/Footer";
 
 export default function Home() {
     return (
         <>
-            <Head />
+            <Head/>
             <main className="min-h-screen antialiased bg-grid-white/[0.02]">
-                <HeroSection />
-                <HeroSection />
-                <HeroSection />
+                <ConversationalCommerce/>
                 <HeroSection />
             </main>
             <Footer/>
         </>
     );
 }
+
+

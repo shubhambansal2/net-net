@@ -1,0 +1,55 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background-color: #f9f9f9;
+  }
+  
+  .content {
+    flex: 1;
+    padding-right: 2rem;
+  }
+  
+  .title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .subtitle {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .button {
+    background-color: #6c63ff;
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .imageContainer {
+    position: relative;
+  }
+  
+  .image {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .iconContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 1rem;
+  }

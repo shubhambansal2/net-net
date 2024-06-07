@@ -59,3 +59,15 @@
 @keyframes blink {
     50% { opacity: 0; }
 }
+
+.main-content {
+    height: 80vh; /* or any other value slightly less than 100vh */
+}
+
+.chatbot-page {
+    height: 60%; /* Ensure the main container takes up the full height */
+    display: flex;
+    justify-content: center;
+    padding-top: 15px;
+    box-sizing: border-box; /* Include padding in the element's total height and width */
+}
