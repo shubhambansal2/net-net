@@ -38,3 +38,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+// new changes to be merged
