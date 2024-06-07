@@ -21,7 +21,7 @@ function Navbar() {
             {/*<div className="">*/}
                 <div className="flex-1 flex justify-between items-center px-4 py-3 md:py-4 ">
                     <Link href="/">
-                        <Image src={blueberryLogo} alt="Blueberry AI" className="h-10 md:h-12 w-auto ml-10 mt-3" priority={true} />
+                        <Image src={blueberryLogo} alt="Blueberry AI" className="h-14 md:h-14 w-auto ml-13 mt-4" priority={true} />
                     </Link>
                     <div className="md:hidden">
                         <button onClick={toggleMenu} className="focus:outline-none">

@@ -19,11 +19,9 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-  showFooter = false,
+  children
 }: Readonly<{
   children: React.ReactNode;
-  showFooter?: boolean;
 }>) {
   return (
     <html lang="en">
@@ -39,4 +37,4 @@ export default function RootLayout({
   );
 }
 
-// new changes to be merged
+// new changes to be merged 
