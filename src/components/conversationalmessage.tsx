@@ -8,7 +8,7 @@ import { FlipWords } from "@/components/ui/flip-words";
 const ConversationalCommerce = () => {
     const words = ["Powerful", "Conversational","Responsive"]
     return (
-      <div className="container h-[40rem] flex justify-center items-center px-4">
+      <div className="container flex justify-center items-center px-4 my-4">
         <div className="content">
           <h1 className="title">Harness the power of LLMs</h1>
           <h2 className="subtitle"></h2>
@@ -19,7 +19,7 @@ const ConversationalCommerce = () => {
           </div>
           <button className="button">Try Chatbot</button>
         </div>
-        <div className="imageContainer">
+        {/* <div className="imageContainer">
         <CardContainer className="inter-var">
         <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
           <CardItem>
@@ -27,7 +27,7 @@ const ConversationalCommerce = () => {
           </CardItem>
         </CardBody>
       </CardContainer>
-        </div>
+        </div> */}
           <div className={"iconContainer"}>
             {/* Add icons here */}
           </div>
