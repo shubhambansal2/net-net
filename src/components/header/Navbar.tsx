@@ -4,7 +4,7 @@
 import React, { useState } from "react";
 import { HoveredLink, Menu, MenuItem } from "@/components/ui/navbar-menu";
 import Link from "next/link";
-import blueberryLogo from '@/../public/blueberryLogo.png';
+import blueberryLogo from '@/../public/logo.svg';
 import Image from "next/image";
 import '@/components/header/style.css';
 
@@ -17,13 +17,12 @@ function Navbar() {
     };
 
     return (
-        <header className="fixed w-full mx-auto flex flex-col top-0 inset-x-0  md:flex-row bg-white z-50">
+        <header className="fixed w-full flex flex-col top-0 inset-x-0  md:flex-row bg-white z-50 py-1">
             {/*<div className="">*/}
-                <div className="flex-1 flex justify-between items-center px-4 py-2 md:py-2">
+                <div className="flex-1 flex justify-between items-center px-4 md:py-2">
                     <Link href="/">
-                        <Image src={blueberryLogo} alt="Blueberry AI" width={250} // Set the desired width
-                        height={70} // Set the desired height
-                        className="ml-13 mt-4"
+                        <Image src={blueberryLogo} alt="Blueberry AI"
+                        className="ml-13"
                          priority={true} />
                     </Link>
                     <div className="md:hidden">
@@ -34,7 +33,7 @@ function Navbar() {
                         </button>
                     </div>
                 </div>
-                <div className={`flex-grow ${menuOpen ? 'block' : 'hidden'} md:flex md:items-center md:justify-center px-4 py-2`}>
+                <div className={`flex-grow ${menuOpen ? 'block' : 'hidden'} md:flex md:items-center md:justify-center px-4`}>
                     <Menu setActive={setActive}>
                         <div className="flex flex-col md:flex-row md:space-x-16 space-y-4 md:space-y-0">
                             <MenuItem setActive={setActive} active={active} item="Industry">
