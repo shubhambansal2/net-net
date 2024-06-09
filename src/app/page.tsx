@@ -8,24 +8,50 @@ import ConversationalCommerce from '@/components/conversationalmessage';
 import {BentoGridDemo} from "@/components/blogcards";
 import {Chatbothome} from "@/components/chatbothomeui";
 import Footer from "@/components/Footer";
-
+import { AuroraBackground } from "@/components/ui/aurora-background";
+import { motion } from "framer-motion";
 
 export default function Home() {
     return (
         <>  
             <Head/>
-            <main className="min-h-screen antialiased bg-grid-white/[0.02]">
-            <div className="flex flex-col justify-center items-center min-h-[40rem]">
-                    <div className="flex flex-col justify-center items-center space-y-0 px-2 mt-20"> {/* Changed to space-y-4 for vertical spacing */}
+            <AuroraBackground>
+            <motion.div
+        initial={{ opacity: 0.0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 0.3,
+          duration: 0.8,
+          ease: "easeInOut",
+        }}
+        className="relative flex flex-col gap-4 items-center justify-center px-4"
+      >
+            <main className="min-h-screen antialiased bg-grid-grey/[0.02] z-10">
+            <div className="flex flex-col justify-center items-center mt-5 min-h-[40rem]">
+                    {/* <div className="flex flex-col justify-center items-center space-y-4 px-2 mt-20">  */}
                             <Chatbothome/>
                             <ConversationalCommerce/>
-                    </div>
+                    {/* </div> */}
                 </div>
                 <div className="mt-2"> {/* Add this div with a small top margin */}
                 <BentoGridDemo />
                 </div>
             </main>
+            </motion.div>
+            </AuroraBackground>
             <Footer/>
         </>
     );
 }
+
+
+{/* <motion.div
+initial={{ opacity: 0.0, y: 40 }}
+whileInView={{ opacity: 1, y: 0 }}
+transition={{
+  delay: 0.3,
+  duration: 0.8,
+  ease: "easeInOut",
+    }} 
+className=" flex flex-col gap-4 items-center justify-center px-4">*/}
+{/* </motion.div> */}

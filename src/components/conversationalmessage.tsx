@@ -4,20 +4,22 @@ import womenimage from '@/../public/customercare.jpg';
 import Image from "next/image";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { FlipWords } from "@/components/ui/flip-words";
+import { Typewriterelement } from "@/components/typewriter";
 
 const ConversationalCommerce = () => {
     const words = ["Powerful", "Conversational","Responsive"]
     return (
-      <div className="container flex justify-center items-center px-4 my-4">
+      <div className="flex justify-center items-center px-4 my-4">
         <div className="content">
-          <h1 className="title">Harness the power of LLMs</h1>
-          <h2 className="subtitle"></h2>
+          <Typewriterelement />
+          {/* <h1 className="title">Harness the power of LLMs</h1>
+          <h2 className="subtitle"></h2> */}
           <div className="text-4xl mx-auto font-normal text-neutral-600 dark:text-neutral-400">
             Build
             <FlipWords words={words} /> <br />
             chatbots with Blueberry AI
           </div>
-          <button className="button">Try Chatbot</button>
+          <button className="px-4 py-2 mt-2 rounded-md border border-black bg-white text-black text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">Try Chatbot</button>
         </div>
         {/* <div className="imageContainer">
         <CardContainer className="inter-var">
