@@ -19,9 +19,12 @@ function Navbar() {
     return (
         <header className="fixed w-full mx-auto flex flex-col top-0 inset-x-0  md:flex-row bg-white z-50">
             {/*<div className="">*/}
-                <div className="flex-1 flex justify-between items-center px-4 py-3 md:py-4 ">
+                <div className="flex-1 flex justify-between items-center px-4 py-2 md:py-2">
                     <Link href="/">
-                        <Image src={blueberryLogo} alt="Blueberry AI" className="h-14 md:h-14 w-auto ml-13 mt-4" priority={true} />
+                        <Image src={blueberryLogo} alt="Blueberry AI" width={250} // Set the desired width
+                        height={70} // Set the desired height
+                        className="ml-13 mt-4"
+                         priority={true} />
                     </Link>
                     <div className="md:hidden">
                         <button onClick={toggleMenu} className="focus:outline-none">
