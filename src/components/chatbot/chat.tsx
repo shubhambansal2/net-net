@@ -1,6 +1,6 @@
 import React, {MouseEventHandler, useEffect, useRef, useState} from 'react';
 // import data from "../../../public/chatbot.json";
-import Response from "@/app/projects/chatbot/Response";
+import Response from "@/app/chatbot/Response";
 import '@/components/chatbot/chat.css'
 
 // Generate a new session_id on page load
