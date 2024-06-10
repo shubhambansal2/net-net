@@ -57,11 +57,11 @@ function Navbar() {
                                     <HoveredLink href="/resources/webinars">Webinars</HoveredLink>
                                 </div>
                             </MenuItem>
-                            <Link href="/about-us">
+                            <Link href="/aboutus">
                                 <MenuItem setActive={setActive} active={active} item="About Us" />
                             </Link>
-                            <Link href="/book-demo">
-                                <MenuItem setActive={setActive} active={active} item="Book a Demo" />
+                            <Link href="/contactus">
+                                <MenuItem setActive={setActive} active={active} item="Contact Us" />
                             </Link>
                         </div>
                     </Menu>
