@@ -7,7 +7,6 @@ import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 
 export default function Aboutus() {
     const [isButtonVisible, setButtonVisible] = useState(false);
-    
     const words = [
         {
           text: "Welcome to Blueberry AI",

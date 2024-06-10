@@ -52,6 +52,7 @@ function Navbar() {
                             <Link href="/blog">
                                 <MenuItem setActive={setActive} active={active} item="Blog" />
                             </Link>
+
                             <Link href="/aboutus">
                                 <MenuItem setActive={setActive} active={active} item="About Us" />
                             </Link>
