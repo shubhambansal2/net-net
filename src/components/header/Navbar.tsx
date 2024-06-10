@@ -4,7 +4,7 @@
 import React, { useState } from "react";
 import { HoveredLink, Menu, MenuItem } from "@/components/ui/navbar-menu";
 import Link from "next/link";
-import blueberryLogo from '@/../public/logo.svg';
+import blueberryLogo from '@/../public/logo2.svg';
 import Image from "next/image";
 import '@/components/header/style.css';
 
@@ -45,18 +45,14 @@ function Navbar() {
                             </MenuItem>
                             <MenuItem setActive={setActive} active={active} item="Solutions">
                                 <div className="flex flex-col space-y-4 text-sm">
-                                    <HoveredLink href="/projects/chatbot">Chatbots</HoveredLink>
-                                    <HoveredLink href="/solutions/ai-search">AI Based Search</HoveredLink>
-                                    <HoveredLink href="/solutions/data-analytics">Data Analytics</HoveredLink>
+                                    <HoveredLink href="/chatbot">Chatbots</HoveredLink>
+                                    <HoveredLink href="/aisearch">AI Based Search</HoveredLink>
                                 </div>
                             </MenuItem>
-                            <MenuItem setActive={setActive} active={active} item="Resources">
-                                <div className="flex flex-col space-y-4 text-sm">
-                                    <HoveredLink href="/resources/blog">Blog</HoveredLink>
-                                    <HoveredLink href="/resources/case-studies">Case Studies</HoveredLink>
-                                    <HoveredLink href="/resources/webinars">Webinars</HoveredLink>
-                                </div>
-                            </MenuItem>
+                            <Link href="/blog">
+                                <MenuItem setActive={setActive} active={active} item="Blog" />
+                            </Link>
+
                             <Link href="/aboutus">
                                 <MenuItem setActive={setActive} active={active} item="About Us" />
                             </Link>

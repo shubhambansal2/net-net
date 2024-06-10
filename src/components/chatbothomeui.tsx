@@ -1,13 +1,16 @@
+"use client";
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
- 
+import { useRouter } from "next/router";
+
+
 export function Chatbothome() {
+  
   const placeholders = [
     "What is the capital of France?",
     "How to make a cup of coffee?",
     "Where is my order?",
     "I want to return this product",
   ];
- 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
   };
