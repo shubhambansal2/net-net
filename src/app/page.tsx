@@ -20,12 +20,11 @@ export default function Home() {
         initial={{ opacity: 0.0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{
-          delay: 0.3,
+          delay: 0.2,
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="relative flex flex-col gap-4 items-center justify-center px-4"
-      >
+        className="relative flex flex-col gap-4 items-center justify-center px-4">
             <main className="min-h-screen antialiased bg-grid-grey/[0.02] z-10">
             <div className="flex flex-col justify-center items-center mt-5 min-h-[40rem]">
                     {/* <div className="flex flex-col justify-center items-center space-y-4 px-2 mt-20">  */}

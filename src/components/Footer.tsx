@@ -2,7 +2,7 @@ import "@/styles/footer.css"
 
 function Footer() {
     return (
-        <footer className="footerBackgroundColor text-gray-400 py-12 mt-auto">
+        <footer className="footerBackgroundColor text-gray-400 py-12 mt-10">
             <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8">
                 <div>
                     <h2 className="text-white text-lg font-semibold mb-4">About Us</h2>

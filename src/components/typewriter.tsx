@@ -7,11 +7,11 @@ export function Typewriterelement() {
       className: "text-4xl"
     },
     {
-      text: "the power of Large",
+      text: "the power of",
       className: "text-4xl"
     },
     {
-      text: "Language",
+      text: "Large Language",
       className: "text-blue-500 dark:text-blue-500 text-4xl"
     },
     {
