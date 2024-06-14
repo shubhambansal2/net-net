@@ -17,7 +17,7 @@ function Navbar() {
     };
 
     return (
-        <header className="fixed w-full flex flex-col top-0 inset-x-0  md:flex-row bg-white z-50 py-1">
+        <header className="fixed w-full flex flex-col top-0 inset-x-0  md:flex-row bg-white z-50 py-1 h-16">
             {/*<div className="">*/}
                 <div className="flex-1 flex justify-between items-center px-4 md:py-2">
                     <Link href="/">
@@ -35,7 +35,7 @@ function Navbar() {
                 </div>
                 <div className={`flex-grow ${menuOpen ? 'block' : 'hidden'} md:flex md:items-center md:justify-center px-4`}>
                     <Menu setActive={setActive}>
-                        <div className="flex flex-col md:flex-row md:space-x-16 space-y-4 md:space-y-0">
+                        <div className="flex flex-col md:flex-row md:space-x-16 md:space-y-0">
                             <MenuItem setActive={setActive} active={active} item="Industry">
                                 <div className="flex flex-col space-y-4 text-sm">
                                     <HoveredLink href="/industry/finance">Finance</HoveredLink>
@@ -52,6 +52,7 @@ function Navbar() {
                             <Link href="/blog">
                                 <MenuItem setActive={setActive} active={active} item="Blog" />
                             </Link>
+
                             <Link href="/aboutus">
                                 <MenuItem setActive={setActive} active={active} item="About Us" />
                             </Link>

@@ -1,7 +1,9 @@
-import React, {MouseEventHandler, useEffect, useRef, useState} from 'react';
-// import data from "../../../public/chatbot.json";
+import React, { useState, useEffect, useRef } from 'react';
 import Response from "@/app/chatbot/Response";
-import '@/components/chatbot/chat.css'
+import Image from "next/image";
+import blueberrylogo from "../../../public/blueberryLogo.png";
+import IconLogo from '@/../public/logo3.svg';
+import TypewriterEffect from './typewriter';
 
 // Generate a new session_id on page load
 let sessionId = 'A' + Math.floor(Math.random() * 1000000);
@@ -18,14 +20,10 @@ interface Data {
     };
 }
 
-const Chat = () => {
-
+const Temp = () => {
     const [inputValue, setInputValue] = useState('');
-    const [result, setResult] = useState<string | null>(null);
-    const [displayedResult, setDisplayedResult] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [conversation, setConversation] = useState<{ question: string, answer: string | null }[]>([]);
-    const lastQuestionRef = useRef<HTMLDivElement>(null);
+    const [conversation, setConversation] = useState<{ question: string, answer: string | null, isTyping?: boolean }[]>([]);
     const chatContainerRef = useRef<HTMLDivElement>(null);
     const [selectedIndustry, setSelectedIndustry] = useState<string>('');
     const [roles, setRoles] = useState<string[]>([]);
@@ -33,14 +31,12 @@ const Chat = () => {
     const [showCards, setShowCards] = useState(true);
     const [isSubmittingFromCard, setIsSubmittingFromCard] = useState(false);
     const [data, setData] = useState<Data>({ chatbots: {} });
-    const [rag, setRag] = useState<boolean> (false); // RAG status
-
+    const [rag, setRag] = useState<boolean>(false); // RAG status
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch('/api/chatbots');
-
                 const jsonData = await response.json();
                 const formattedData = { chatbots: {} };
 
@@ -69,7 +65,6 @@ const Chat = () => {
     const handleIndustryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const industry = event.target.value;
         setSelectedIndustry(industry);
-        // setRoles(industry ? data.chatbots[industry].role : []);
         if (industry && data.chatbots.hasOwnProperty(industry)) {
             // @ts-ignore
             setRoles(data.chatbots[industry]?.role);
@@ -90,29 +85,33 @@ const Chat = () => {
         setRag(event.target.value === 'true');
         sessionId = 'A' + Math.floor(Math.random() * 1000000);
         console.log("New session ID for changing RAG Status:", sessionId);
-    }
+    };
 
     const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
-        // event.preventDefault();
-        console.log("Input vlaue: ", inputValue)
-        // setIsSubmittingFromCard(false);
         if (event) event.preventDefault();
         if (!inputValue) return;
+
+        setConversation(prevConversation => [
+            ...prevConversation,
+            { question: inputValue, answer: null, isTyping: true }
+        ]);
         setIsLoading(true);
-        setDisplayedResult('');
         setShowCards(false);
+        setInputValue('');
 
         try {
-            const response = await Response(inputValue,sessionId, selectedIndustry, selectedRole, rag); // Pass inputValue to Response function
-            setResult(response);
-            // setHistory(prevHistory => [...prevHistory, { question: inputValue, answer: response }]);
-            setConversation(prevConversation => [...prevConversation, { question: inputValue, answer: response }]);
+            const response = await Response(inputValue, sessionId, selectedIndustry, selectedRole, rag);
+            setConversation(prevConversation =>
+                prevConversation.map((item, index) =>
+                    index === prevConversation.length - 1
+                        ? { ...item, answer: response, isTyping: false }
+                        : item
+                )
+            );
         } catch (error) {
             console.error("Error fetching response:", error);
         } finally {
             setIsLoading(false);
-            setInputValue('');
-            setIsSubmittingFromCard(false);
         }
     };
 
@@ -121,147 +120,134 @@ const Chat = () => {
     };
 
     useEffect(() => {
+
         if (chatContainerRef.current) {
+            console.log("Scroll called");
             chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
         }
+
     }, [conversation, isLoading]);
 
     useEffect(() => {
         if (inputValue && isSubmittingFromCard) {
-            handleSubmit();
+            handleSubmit().then(r => {});
             setInputValue('');
-            setIsSubmittingFromCard(false); // Reset after submission
+            setIsSubmittingFromCard(false);
         }
-    }, [isSubmittingFromCard, inputValue]);
+    }, [isSubmittingFromCard, inputValue, handleSubmit]);
 
-
-    const handleCardClick: MouseEventHandler<HTMLDivElement> = async (event) => {
+    const handleCardClick: React.MouseEventHandler<HTMLDivElement> = async (event) => {
         const query = (event.target as HTMLDivElement).textContent || '';
         setInputValue(query);
-        setIsSubmittingFromCard(true);  // Signal to handleSubmit in useEffect
-
-        // Immediately submit since input is already updated
+        setIsSubmittingFromCard(true);
         await handleSubmit();
     };
 
+    const scrollToBottom = () => {
+        if (chatContainerRef.current) {
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        }
+    };
 
     return (
-        <>
+        <div className="flex h-screen">
+            {/* Sidebar (div1) */}
+            <div className="w-1/5 flex items-center justify-center flex-col">
+                <div className="space-y-8 flex flex-col py-10">
+                    <label htmlFor="industry">Industry: </label>
+                    <select id="industry" value={selectedIndustry} onChange={handleIndustryChange}>
+                        <option value="">--Select Industry--</option>
+                        {Object.keys(data.chatbots).map((industry) => (
+                            <option key={industry} value={industry} className="text-center">{industry}</option>
+                        ))}
+                    </select>
 
-            <div className="chatbot-page flex h-screen">
-                {/*sidebar*/}
-                {/* flex md:flex-row grid-cols-2 justify-center pt-15 h-screen*/}
-                <div className="sidebar px-5 space-y-8 text-center  bg-gray-100 py-10">
-
-
-                    <div>
-                        <label htmlFor="industry">Industry: </label>
-                        <select id="industry" value={selectedIndustry} onChange={handleIndustryChange}>
-                            <option value="">--Select Industry--</option>
-                            {Object.keys(data.chatbots).map((industry) => (
-                                <option key={industry} value={industry} className="text-center">{industry}</option>
-                            ))}
-                        </select>
-                    </div>
-
-                    <div>
-                        <label htmlFor="roles">Role: </label>
-                        <select id="roles" onChange={handleRoleChange}>
-                            <option value="">--Select Role--</option>
-                            {roles.map((role) => (
-                                <option key={role} value={role} className="text-center">{role}</option>
-                            ))}
-                        </select>
-                    </div>
-                    <div>
-                        <label htmlFor="rag">RAG Status: </label>
-                        <select id="rag" onChange={handleRagChange}>
-                            <option value="">--Select RAG Status--</option>
-                            <option value="true">True</option>
-                            <option value="false">False</option>
-                        </select>
-                    </div>
-                    {/*</div>*/}
+                    <label htmlFor="roles">Role: </label>
+                    <select id="roles" onChange={handleRoleChange}>
+                        <option value="">--Select Role--</option>
+                        {roles.map((role) => (
+                            <option key={role} value={role} className="text-center">{role}</option>
+                        ))}
+                    </select>
                 </div>
 
-                {/*chat box*/}
-
-                <div className="main-content w-full md:w-1/5 text-center flex-1 border-1 bg-blue-20 h-screen px-100">
-                    <div ref={chatContainerRef} className="chat-history mt-4 w-full h-full">
-
-                        {conversation.map((item, index) => (
-                            <div key={index} className="flex flex-col items-center mb-2">
-                                <div className="question p-4 rounded mb-4 shadow-md self-end bg-white">
-                                    {item.question}
-                                </div>
-                                {item.answer && (
-                                    <div className="answer p-4 rounded mb-4  shadow-md self-start bg-white">
-                                        {item.answer}
-                                    </div>
-                                )}
-                            </div>
-                        ))}
-
-                        {/* Cards */}
-                        {showCards && (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {(selectedIndustry && data.chatbots[selectedIndustry]?.query) ? (
-                                    data.chatbots[selectedIndustry]?.query?.map((query, index) => (
-                                        <div
-                                            key={index}
-                                            className="bg-white p-4 rounded-lg shadow-md cursor-pointer hover:bg-gray-100"
-                                            onClick={handleCardClick}
-                                        >
-                                            {query}
-                                        </div>
-                                    ))
-                                ) : (
-                                    data.chatbots['default']?.query?.map((query, index) => (
-                                        <div
-                                            key={index}
-                                            className="bg-white p-4 rounded-lg shadow-md cursor-pointer hover:bg-gray-100"
-                                            onClick={handleCardClick}
-                                        >
-                                            {query}
-                                        </div>
-                                    ))
-                                )}
-
-                            </div>)
-                        }
-
-
-                        {isLoading && (
-                            <div className="flex items-center justify-center mt-4">
-                                <div className="loader border-t-4 border-blue-500 rounded-full w-8 h-8 animate-spin"></div>
-                                <span className="ml-2">Loading...</span>
-                            </div>
-                        )}
-                    </div>
-
-
-                    <div className="fixed bottom-0 left-40 right-0 bg-white p-3">
-                    <form onSubmit={handleSubmit} className="flex space-x-4">
-                    <input
-                        className="w-full p-2 border border-gray-300 rounded text-black"
-                        type="text"
-                        placeholder="Type here..."
-                        value={inputValue}
-                        onChange={handleChange}
-                    />
-                    <button
-                        type="submit"
-                        className="bg-emerald-600 p-2 border border-gray-300 rounded text-white"
-                    >
-                        Submit
-                    </button>
-                    </form>
-                    </div>
-                    {/*<h1 className="text-5xl font-bold mb-2 text-center">Ask me Anything</h1>*/}
+                <div className=" bg-amber-200 py-10">
+                    <label htmlFor="rag">RAG Status: </label>
+                    <select id="rag" onChange={handleRagChange}>
+                        <option value="">--Select RAG Status--</option>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                    </select>
                 </div>
             </div>
-        </>
+
+            {/* Main Content (div2) */}
+            <div className="flex flex-col w-4/5 px-36">
+                {/* Chat with LLM */}
+                <div ref={chatContainerRef} className={`flex-1 ${showCards ? 'flex items-center justify-center' : 'items-start mt-40 chat'}`}>
+                    {conversation.map((item, index) => (
+                        <div key={index} className="flex flex-col items-center mb-2 w-full">
+                            <div className="question p-4 py-2 mb-4 shadow-md self-end rounded-full bg-gray-100">
+                                {item.question}
+                            </div>
+                            <div className="flex items-start w-full py-1">
+                                <div className="w-1/12 flex-shrink-0">
+                                    {/* Replace with your actual logo image */}
+                                    <Image src={IconLogo} alt="" />
+                                </div>
+                                <div className={`answer rounded ${item.isTyping ? 'typewriter' : ' '} `}>
+                                    {item.isTyping ? (
+                                        <span className="typing">...</span>
+                                    ) : (
+                                        <TypewriterEffect text={item.answer || ''} typingSpeed={15} scrollToBottom={scrollToBottom}/>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+
+                    {showCards && (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full justify-center">
+                            {(selectedIndustry && data.chatbots[selectedIndustry]?.query ? data.chatbots[selectedIndustry]?.query : data.chatbots['default']?.query)?.map((query, index) => (
+                                <div
+                                    key={index}
+                                    className="bg-white p-4 rounded-lg shadow-md cursor-pointer hover:bg-gray-100"
+                                    onClick={handleCardClick}
+                                >
+                                    {query}
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+                {/* Query Input */}
+                <div className="sticky bottom-2 bg-white p-2 border border-gray-300 rounded-full shadow-sm items-center">
+                    <form onSubmit={handleSubmit} className="w-full flex">
+                        <div className="w-11/12 py-2">
+                            <input
+                                type="text"
+                                placeholder="Message Blueberry AI"
+                                className="outline-none w-full text-gray-700"
+                                value={inputValue}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className="self-end flex-1">
+                            <button className="bg-gray-200 p-2 rounded-full hover:bg-gray-300">
+                                <svg className="w-6 h-6 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        fillRule="evenodd"
+                                        d="M10 3a7 7 0 100 14 7 7 0 000-14zm-.293 10.707a1 1 0 111.414-1.414l3-3a1 1 0 00-1.414-1.414l-3 3-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0z"
+                                        clipRule="evenodd"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     );
 };
 
-export default Chat;
+export default Temp;
