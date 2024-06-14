@@ -1,5 +1,5 @@
 "use client";
-
+import image1 from '@/../public/homepagephone1.png';
 import Image from "next/image";
 import HeroSection from "@/components/HeroSection";
 import FeatureSection from "@/components/FeatureSection";
@@ -10,8 +10,13 @@ import {Chatbothome} from "@/components/chatbothomeui";
 import Footer from "@/components/Footer";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { motion } from "framer-motion";
+import StaticDemo from "@/components/staticdemo";
+import Customtypewriter from "@/components/customtypewriter";
+
 
 export default function Home() {
+    const image_1 = <Image src={image1} alt="Empower conversations"  className="h-42 w-42 md:h-50 md:w-50 ml-10 mt-3" priority={true} />;
+    const image_2 = <Image src={image1} alt="Empower conversations"  className="h-42 w-42 md:h-50 md:w-50 ml-10 mt-3" priority={true} />;
     return (
         <>  
             <Head/>
@@ -32,9 +37,26 @@ export default function Home() {
                             <ConversationalCommerce/>
                     {/* </div> */}
                 </div>
+                <div className="relative flex flex-row mt-2">                     
+                <StaticDemo/>
+                {/* <p className="text-black-500 text-4xl">Improve Customer Satisfaction</p> */}
+                <Customtypewriter text={"Improve Customer Satisfaction"} className={"text-blue-500 dark:text-blue-500 text-4xl"}/>
+                </div>
+                <div className="relative flex flex-row mt-2">         
+                    <div className="relative flex flex-col">
+                    {/* <p className="text-black-500 text-4xl">Reduce your Customer Support Cost Significantly</p> */}
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <Customtypewriter text={"Reduce your Customer Support Cost Significantly"} className={"text-black-500 dark:text-blue-500 text-4xl"}/>
+                    <Customtypewriter text={"Let AI do the Job"} className={"text-black-500 dark:text-blue-500 text-4xl"}/>
+                    </div>            
+                     <StaticDemo/>
+                    </div> 
                 <div className="mt-2"> {/* Add this div with a small top margin */}
                 <BentoGridDemo />
                 </div>
+                
             </main>
             </motion.div>
             </AuroraBackground>

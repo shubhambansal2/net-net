@@ -93,7 +93,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"),addVariablesForColors,function ({ matchUtilities, theme }: any) {
+  plugins: [require("tailwindcss-animate"),require("@tailwindcss/typography"),addVariablesForColors,function ({ matchUtilities, theme }: any) {
     matchUtilities(
       {
         "bg-grid": (value: any) => ({

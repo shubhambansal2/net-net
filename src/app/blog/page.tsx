@@ -1,24 +1,40 @@
-'use client'
 
-import React, { useState, useEffect } from "react";
-import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
-import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
+import React from "react";
+import { fetchpages, fetchNotionPages} from '@/lib/notion';
+// import exp from 'constants';
+// import { NotionPage } from '@/lib/notiontypes';
 
+export async function Blog() {
 
-export default function Aboutus() {
-    const [isButtonVisible, setButtonVisible] = useState(false);
-    
-    const words = [
-        {
-          text: "Coming Pretty Soon",
-          className: "text-blue-500 dark:text-blue-500 text-4xl"
-        }
-    ]    
+    const databaseId = '588f5828beed4cf3bc46f18e3954455a';
+    const pages =  await fetchNotionPages(databaseId);
+    console.log('Data pulled from Notion: ', pages);
+
     return (
-        <div className="h-[50rem] w-full dark:bg-black bg-white  dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex items-center justify-center">
-      <div className="flex flex-col items-center justify-center space-y-10">
-      <TypewriterEffectSmooth words={words} />
-      </div> 
-      </div>
+       <main className="">
+        <div>
+        <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <h1 className="text-center text-bold">Welcome to the blog page</h1>
+          <ul>
+          {pages.map((page) => {
+            const title = page.properties.title.map(t => t.text.content).join(' ') || 'Untitled';
+            const slug  = page.properties.slug.map(s => s.text.content).join(' ') || 'Untitled';
+            return (
+              <li key={page.id}>
+              <a href={`/blog/${slug}`} target="_blank" rel="noopener noreferrer">
+                {title}
+              </a>
+              </li>
+            );
+          })}
+      </ul>
+        </div>
+        </main>
     );
   }
+
+  export default Blog;
