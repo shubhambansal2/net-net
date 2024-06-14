@@ -1,10 +1,10 @@
 
 import React from "react";
-import { fetchpages, fetchNotionPages} from '@/lib/notion';
+import {fetchNotionPages} from '@/lib/notion';
 // import exp from 'constants';
 // import { NotionPage } from '@/lib/notiontypes';
 
-export async function Blog() {
+export default async function Blog() {
 
     const databaseId = '588f5828beed4cf3bc46f18e3954455a';
     const pages =  await fetchNotionPages(databaseId);
@@ -37,4 +37,4 @@ export async function Blog() {
     );
   }
 
-  export default Blog;
+  // export default Blog;
