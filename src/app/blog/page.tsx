@@ -3,6 +3,7 @@ import React from "react";
 import {fetchNotionPages} from '@/lib/notion';
 // import {WobbleBlogCards} from "@/components/blogcards2"
 import {BentoGridDemo} from "@/components/blogcards";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 // import exp from 'constants';
 // import { NotionPage } from '@/lib/notiontypes';
 
@@ -13,12 +14,17 @@ export default async function Blog() {
     console.log('Data pulled from Notion: ', pages);
 
     return (
-       <main className="">
-        <div>
-          <div className="mt-40">
+
+        <AuroraBackground>
+          <div className="mt-20 z-10">
           <BentoGridDemo/>
           </div>
-          <ul>
+        </AuroraBackground>
+    );
+  }
+
+  {/* </div> */}
+          {/* <ul>
           {pages.map((page) => {
             const title = page.properties.title.map(t => t.text.content).join(' ') || 'Untitled';
             const slug  = page.properties.slug.map(s => s.text.content).join(' ') || 'Untitled';
@@ -30,10 +36,7 @@ export default async function Blog() {
               </li>
             );
           })}
-      </ul>
-        </div>
-        </main>
-    );
-  }
+      </ul> */}
+        {/* </div> */}
 
   // export default Blog;
