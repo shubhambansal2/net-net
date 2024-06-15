@@ -3,7 +3,7 @@ import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 export function Typewriterelement() {
   const words = [
     {
-      text: "Harness ",
+      text: "Harness",
       className: "text-4xl"
     },
     {
@@ -12,11 +12,11 @@ export function Typewriterelement() {
     },
     {
       text: "Large Language",
-      className: "text-blue-500 dark:text-blue-500 text-4xl"
+      className: "text-blue-700 dark:text-blue-500 text-4xl"
     },
     {
       text: "Models",
-      className: "text-blue-500 dark:text-blue-500 text-4xl"
+      className: "text-blue-700 dark:text-blue-500 text-4xl"
     }
   ];
   return (
@@ -25,7 +25,6 @@ export function Typewriterelement() {
         Power your business with the latest AI technology
       </p>
       <TypewriterEffectSmooth words={words} />
-     
     </div>
   );
 }

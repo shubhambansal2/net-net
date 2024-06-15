@@ -1,6 +1,8 @@
 
 import React from "react";
 import {fetchNotionPages} from '@/lib/notion';
+// import {WobbleBlogCards} from "@/components/blogcards2"
+import {BentoGridDemo} from "@/components/blogcards";
 // import exp from 'constants';
 // import { NotionPage } from '@/lib/notiontypes';
 
@@ -13,12 +15,9 @@ export default async function Blog() {
     return (
        <main className="">
         <div>
-        <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <h1 className="text-center text-bold">Welcome to the blog page</h1>
+          <div className="mt-40">
+          <BentoGridDemo/>
+          </div>
           <ul>
           {pages.map((page) => {
             const title = page.properties.title.map(t => t.text.content).join(' ') || 'Untitled';

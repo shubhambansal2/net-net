@@ -2,6 +2,8 @@ import type { Config } from "tailwindcss"
 const defaultTheme = require("tailwindcss/defaultTheme");
 const svgToDataUri = require("mini-svg-data-uri");
 const colors = require("tailwindcss/colors");
+const {nextui} = require("@nextui-org/react");
+
 
 const {
   default: flattenColorPalette,
@@ -14,6 +16,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
 	],
   prefix: "",
   theme: {
@@ -93,7 +96,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"),require("@tailwindcss/typography"),addVariablesForColors,function ({ matchUtilities, theme }: any) {
+  plugins: [nextui(),require("tailwindcss-animate"),require("@tailwindcss/typography"),addVariablesForColors,function ({ matchUtilities, theme }: any) {
     matchUtilities(
       {
         "bg-grid": (value: any) => ({
