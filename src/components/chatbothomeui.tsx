@@ -20,9 +20,17 @@ export function Chatbothome() {
   };
   return (
     <div className=" flex flex-col justify-center  items-center px-4 pb-0 py-20 mt-2">
-      <h2 className="mb-10 sm:mb-20 text-xl text-center sm:text-5xl dark:text-white text-black">
-        Ask Blueberry AI Anything
+      <div className="flex flex-row ml-2">
+      <h2 className="mb-10 sm:mb-20 text-xl ml-2 text-center sm:text-5xl dark:text-white text-black">
+          Ask
       </h2>
+      <h2 className="mb-10 sm:mb-20 text-xl  ml-4 text-center sm:text-5xl dark:text-white text-blue-900">
+          BlueberryAI
+      </h2>
+      <h2 className="mb-10 sm:mb-20 text-xl ml-4 text-center sm:text-5xl dark:text-white text-black">
+          Anything
+      </h2>
+      </div>
       <PlaceholdersAndVanishInput
         placeholders={placeholders}
         onChange={handleChange}
