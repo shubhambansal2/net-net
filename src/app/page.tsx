@@ -1,7 +1,6 @@
 "use client";
 import Head from './head';
 import ConversationalCommerce from '@/components/conversationalmessage';
-
 import {Chatbothome} from "@/components/chatbothomeui";
 import Footer from "@/components/Footer";
 import { AuroraBackground } from "@/components/ui/aurora-background";
@@ -34,7 +33,7 @@ export default function Home() {
                             <ConversationalCommerce/>
                     {/* </div> */}
                 </div>
-                <div className="relative flex flex-row mt-2">                     
+                {/* <div className="relative flex flex-row mt-2">                     
                 <StaticDemo/>
                 <Customtypewriter text={"Improve Customer Satisfaction (CSAT) by atleast 30%"} className={"text-blue-800 dark:text-blue-500 text-4xl"}/>
                 </div>
@@ -45,8 +44,8 @@ export default function Home() {
                     </div>
                 </div>
                 <div className="mt-2">
-                <WobbleBlogCards/>
-                </div>
+                <WobbleBlogCards/> */}
+                {/* </div> */}
                 
             </main>
             </motion.div>

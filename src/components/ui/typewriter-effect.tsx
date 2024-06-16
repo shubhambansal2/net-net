@@ -166,7 +166,7 @@ export const TypewriterEffectSmooth = ({
         onAnimationComplete={() => setIsTyping(false)}
       >
         <div
-          className="text-xs sm:text-base md:text-xl lg:text:3xl xl:text-5xl font-bold"
+          className="text-lg sm:text-2xl md:text-2xl lg:text:3xl xl:text-5xl font-bold"
           style={{
             whiteSpace: "nowrap",
           }}
@@ -176,7 +176,7 @@ export const TypewriterEffectSmooth = ({
       </motion.div>
       ): (
         <div
-          className="text-xs sm:text-base md:text-xl lg:text:3xl xl:text-5xl font-bold"
+          className="text-lg sm:text-2xl md:text-2xl lg:text:3xl xl:text-5xl font-bold"
           style={{
             whiteSpace: "nowrap",
           }}
