@@ -37,10 +37,11 @@ export default async function page({params}: {params: {slug: string}}) {
           <br></br>
           <br></br>
           <br></br>
-                {/* <h1 className="text-3xl font-bold text-center">{post.properties.Name.title[0].plain_text}</h1> */}
+          {/* <div className="h-[50rem] w-full dark:bg-black bg-white  dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex items-center justify-center"> */}
                 <div className = "prose" dangerouslySetInnerHTML={{ __html: html }} />
             </div>
-            </main>
+          {/* </div> */}
+          </main>
         );
 
 }
