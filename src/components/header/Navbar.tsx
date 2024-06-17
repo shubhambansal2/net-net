@@ -18,7 +18,7 @@ function Navbar() {
 
     return (
         <header className="fixed  flex flex-col top-0 inset-x-0 md:flex-row bg-white z-50 py-1 h-16 shadow-md">
-            <div className="flex-1 flex justify-between items-center px-4 md:py-2">
+            <div className="flex-1 flex justify-between items-center md:py-2">
                 <Link href="/">
                     <Image src={blueberryLogo} alt="Blueberry AI" className="ml-13" priority={true} />
                 </Link>
@@ -31,33 +31,40 @@ function Navbar() {
                 </div>
             </div>
             <div className={`flex-grow ${menuOpen ? 'block' : 'hidden'} md:flex md:items-center md:justify-center px-4`}>
-                <Menu setActive={setActive}>
-                    <div className="flex flex-col md:flex-row md:space-x-16 md:space-y-0">
-                        <MenuItem setActive={setActive} active={active} item="Industry">
-                            <div className="flex flex-col space-y-4 text-sm">
-                                <HoveredLink href="/industry/finance">Finance</HoveredLink>
-                                <HoveredLink href="/industry/healthcare">Healthcare</HoveredLink>
-                                <HoveredLink href="/industry/technology">Technology</HoveredLink>
-                            </div>
-                        </MenuItem>
-                        <MenuItem setActive={setActive} active={active} item="Solutions">
-                            <div className="flex flex-col space-y-4 text-sm">
-                                <HoveredLink href="/chatbot">Chatbots</HoveredLink>
-                                <HoveredLink href="/aisearch">AI Based Search</HoveredLink>
-                            </div>
-                        </MenuItem>
-                        <Link href="/blog">
-                            <MenuItem setActive={setActive} active={active} item="Blog" />
-                        </Link>
-                        <Link href="/aboutus">
-                            <MenuItem setActive={setActive} active={active} item="About Us" />
-                        </Link>
-                        <Link href="/contactus">
-                            <MenuItem setActive={setActive} active={active} item="Contact Us" />
-                        </Link>
+            <Menu setActive={setActive}>
+            <div className={`flex-grow ${menuOpen ? 'block' : 'hidden'} md:flex md:items-center md:justify-center px-4`}>
+            <Menu setActive={setActive}>
+                <div className="flex flex-col md:flex-row md:space-x-16 md:space-y-0">
+                    <div className="relative group">
+                        <MenuItem setActive={setActive} active={active} item="Industry" />
+                        <div className="absolute left-0 top-full hidden group-hover:flex flex-col bg-white shadow-md p-4 z-10 space-y-4 text-sm">
+                            <HoveredLink href="/industry/finance">Finance</HoveredLink>
+                            <HoveredLink href="/industry/healthcare">Healthcare</HoveredLink>
+                            <HoveredLink href="/industry/technology">Technology</HoveredLink>
+                        </div>
                     </div>
-                </Menu>
-            </div>
+                    <div className="relative group">
+                        <MenuItem setActive={setActive} active={active} item="Solutions" />
+                        <div className="absolute left-0 top-full hidden group-hover:flex flex-col bg-white shadow-md p-4 z-10 space-y-4 text-sm">
+                            <HoveredLink href="/chatbot">Chatbots</HoveredLink>
+                            <HoveredLink href="/aisearch">AI Based Search</HoveredLink>
+                        </div>
+                    </div>
+                    <Link href="/blog">
+                        <MenuItem setActive={setActive} active={active} item="Blog" />
+                    </Link>
+                    <Link href="/aboutus">
+                        <MenuItem setActive={setActive} active={active} item="About Us" />
+                    </Link>
+                    <Link href="/contactus">
+                        <MenuItem setActive={setActive} active={active} item="Contact Us" />
+                    </Link>
+                </div>
+    </Menu>
+</div>
+
+    </Menu>
+</div>
             <div className="flex-1 hidden md:flex justify-center md:justify-end items-center">
                 {/* Empty div for centering */}
             </div>

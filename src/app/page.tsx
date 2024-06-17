@@ -25,28 +25,35 @@ export default function Home() {
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="relative flex flex-col gap-4 items-center justify-center px-4">
+        className="relative flex flex-col gap-4 items-center justify-center">
             <main className="min-h-screen antialiased bg-grid-grey/[0.02] z-10">
-            <div className="flex flex-col justify-center items-center mt-5 min-h-[40rem]">
+                <div className="flex flex-col justify-center items-center mt-5 min-h-[40rem]">
                     {/* <div className="flex flex-col justify-center items-center space-y-4 px-2 mt-20">  */}
                             <Chatbothome/>
                             <ConversationalCommerce/>
                     {/* </div> */}
                 </div>
-                {/* <div className="relative flex flex-row mt-2">                     
-                <StaticDemo/>
-                <Customtypewriter text={"Improve Customer Satisfaction (CSAT) by atleast 30%"} className={"text-blue-800 dark:text-blue-500 text-4xl"}/>
+                <div className="flex lg:flex-row flex-col">
+                <div className="flex flex-col lg:mt-60">
+                <Customtypewriter text={"Improve Customer Satisfaction"} className={"text-blue-900 dark:text-blue-900 text-xl sm:text-2xl lg:text-3xl"}/>
+                <Customtypewriter text={"Engage your customers better"} className={"text-pink-800 dark:text-blue-500 text-xl sm:text-2xl lg:text-3xl"}/>
+                <Customtypewriter text={"Reduce your Customer Support Cost"} className={"text-green-900 dark:text-blue-500 text-xl sm:text-2xl lg:text-3xl"}/>
                 </div>
-                <div className="relative flex flex-row mt-2">         
-                    <div className="relative flex flex-row">
-                    <Customtypewriter text={"Reduce your Customer Support Cost Significantly"} className={"text-blue-800 dark:text-blue-500 text-4xl"}/>
-                     <StaticDemo2/>
+                <StaticDemo/>
+                
+                </div>
+                <div className="flex lg:flex-row flex-col">  
+                    <StaticDemo2/>
+                    <div className="flex flex-col lg:mt-60 lg:order-last order-first">
+                    <Customtypewriter text={"Real time information"} className={"text-blue-1000 dark:text-blue-500 text-xl sm:text-2xl lg:text-3xl"}/>
+                    <Customtypewriter text={"Frequently asked questions"} className={"text-pink-900 dark:text-blue-500 text-xl sm:text-2xl lg:text-3xl"}/>
+                    <Customtypewriter text={"Professional and Prompt Responses   "} className={"text-green-800 dark:text-blue-500 text-xl sm:text-2xl lg:text-3xl"}/>
                     </div>
                 </div>
-                <div className="mt-2">
-                <WobbleBlogCards/> */}
-                {/* </div> */}
-                
+
+                <div className=" mt-2">
+                <WobbleBlogCards/> 
+                </div> 
             </main>
             </motion.div>
             </AuroraBackground>

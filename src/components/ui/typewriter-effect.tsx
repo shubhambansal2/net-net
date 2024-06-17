@@ -72,7 +72,7 @@ export const TypewriterEffect = ({
   return (
     <div
       className={cn(
-        "text-base sm:text-xl md:text-3xl lg:text-5xl font-bold text-center",
+        "text-base sm:text-lg md:text-2xl lg:text-4xl font-bold text-center",
         className
       )}
     >
@@ -148,7 +148,7 @@ export const TypewriterEffectSmooth = ({
   };
  
   return (
-    <div className={cn("flex space-x-1 my-6", className)}>
+    <div className={cn("flex space-x-1", className)}>
       {isTyping ? (
       <motion.div
         className="overflow-hidden pb-2"
@@ -166,7 +166,7 @@ export const TypewriterEffectSmooth = ({
         onAnimationComplete={() => setIsTyping(false)}
       >
         <div
-          className="text-lg sm:text-2xl md:text-2xl lg:text:3xl xl:text-5xl font-bold"
+          className="text-md sm:text-2xl md:text-2xl lg:text:3xl xl:text-5xl font-bold"
           style={{
             whiteSpace: "nowrap",
           }}
@@ -176,7 +176,7 @@ export const TypewriterEffectSmooth = ({
       </motion.div>
       ): (
         <div
-          className="text-lg sm:text-2xl md:text-2xl lg:text:3xl xl:text-5xl font-bold"
+          className="text-md s:text-lg sm:text-2xl md:text-2xl lg:text:3xl xl:text-5xl font-bold"
           style={{
             whiteSpace: "nowrap",
           }}
@@ -198,7 +198,7 @@ export const TypewriterEffectSmooth = ({
             repeatType: "reverse",
           }}
           className={cn(
-            "block rounded-sm w-[4px]  h-4 sm:h-6 xl:h-12 bg-blue-500",
+            "block rounded-sm w-[4px]h-4 sm:h-6 xl:h-12 bg-blue-500",
             cursorClassName
           )}
         ></motion.span>
