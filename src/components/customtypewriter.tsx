@@ -9,7 +9,7 @@ interface TypewriterProps {
 export default function Customtypewriter(words: TypewriterProps) {
     
     return (
-      <div className="flex flex-col items-center justify-center space-y-10">
+      <div className="flex flex-col items-center justify-center">
       <TypewriterEffectSmooth words={[words]}/>
       </div> 
     );

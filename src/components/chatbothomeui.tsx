@@ -19,7 +19,7 @@ export function Chatbothome() {
     console.log("submitted");
   };
   return (
-    <div className=" flex flex-col justify-center  items-center px-4 pb-0 py-20 mt-2 mx-auto">
+    <div className=" flex flex-col justify-center  items-center px-4 pb-0  mt-2 mx-auto">
       <div className="flex flex-row ml-2 mt-0">
       <h2 className="mb-10 sm:mb-20 text-xl ml-2 sm:ml-1 text-center sm:text-5xl dark:text-white text-black">
           Ask

@@ -10,7 +10,7 @@ export default function Aboutus() {
     const words = [
         {
           text: "Welcome to Blueberry AI",
-          className: "text-blue-500 dark:text-blue-500 text-4xl"
+          className: "text-blue-500 dark:text-blue-500 text-3xl"
         }
     ]
 
@@ -21,21 +21,21 @@ export default function Aboutus() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setButtonVisible(true);
-        }, 46000);
+        }, 31000);
 
         return () => clearTimeout(timer);
-    }, [46000]);
+    }, [31000]);
 
     
     return (
-        <div className="h-[50rem] w-full dark:bg-black bg-white  dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex items-center justify-center">
-      <div className="flex flex-col items-center justify-center space-y-10">
+        <div className="h-[50rem] w-full dark:bg-black bg-white  dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex items-center justify-center mt-10">
+      <div className="flex flex-col items-center justify-center space-y-10 mt-40">
       <TypewriterEffectSmooth words={words} />
       <TextGenerateEffect words={words1} delay = {3000}/>
-      <TextGenerateEffect words={words2} delay = {14000}/>
-      <TextGenerateEffect words={words3} delay = {27000} />
+      <TextGenerateEffect words={words2} delay = {10000}/>
+      <TextGenerateEffect words={words3} delay = {18000} />
       {isButtonVisible && (
-                    <button className="px-4 py-2 mt-2 rounded-md border border-black bg-white text-black text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
+                    <button className="px-4 py-2 mt-2 mb-20 rounded-md border border-black bg-white text-black text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
                         Contact Us
                     </button>
                 )}
