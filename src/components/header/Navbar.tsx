@@ -17,22 +17,22 @@ function Navbar() {
     };
 
     return (
-        <header className="fixed  flex flex-col top-0 inset-x-0 md:flex-row bg-white z-50 py-1 h-16 shadow-md">
-            <div className="flex-1 flex justify-between items-center md:py-2">
+        <header className="fixed  flex flex-col top-0 inset-x-0 lg:flex-row bg-white z-50 py-1 h-16 shadow-md">
+            <div className="flex-1 flex justify-between items-center">
                 <Link href="/">
-                    <Image src={blueberryLogo} alt="Blueberry AI" className="ml-13" priority={true} />
+                    <Image src={blueberryLogo} alt="Blueberry AI" style={{ width: '240px' }} className="" priority={true} />
                 </Link>
-                <div className="md:hidden">
+                <div className="lg:hidden">
                     <button onClick={toggleMenu} className="focus:outline-none">
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
                         </svg>
                     </button>
                 </div>
-            </div>
-            <div className={`flex-grow ${menuOpen ? 'block' : 'hidden'} md:flex md:items-center md:justify-center px-4`}>
+                </div>
+            <div className={`flex-grow ${menuOpen ? 'block' : 'hidden'} lg:flex lg:items-center lg:justify-center px-4`}>
             <Menu setActive={setActive}>
-            <div className={`flex-grow ${menuOpen ? 'block' : 'hidden'} md:flex md:items-center md:justify-center px-4`}>
+            <div className={`flex-grow ${menuOpen ? 'block' : 'hidden'} lg:flex lg:items-center lg:justify-center px-4`}>
             <Menu setActive={setActive}>
                 <div className="flex flex-col md:flex-row md:space-x-16 md:space-y-0">
                     <div className="relative group">
