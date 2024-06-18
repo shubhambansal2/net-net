@@ -10,6 +10,8 @@ import StaticDemo2 from "@/components/staticdemo2";
 import Customtypewriter from "@/components/customtypewriter";
 import {WobbleBlogCards} from "@/components/blogcards2"
 import IntegrationLogos from '@/components/logo-marquee';
+import Highlight1 from '@/components/highlighter1';
+import Highlight2 from '@/components/highlighter2';
 
 export default function Home() {
 
@@ -42,29 +44,16 @@ export default function Home() {
                         </div>
                 </div>
                 <div className="flex lg:flex-row flex-col justify-center items-center mt-5">
-                    <div className="flex flex-col lg:mt-30">
-                    <div className="text-xl sm:text-2xl font-bold text-blue-900 dark:text-blue-900">
-                    Improve Customer Satisfaction
-                    </div>
-                    <div className="text-xl sm:text-2xl font-bold text-pink-900 dark:text-pink-900">
-                    Engage your customers better
-                    </div>
-                    <div className="text-xl sm:text-2xl font-bold text-green-900 dark:text-green-900">
-                    Reduce your Customer Support Cost
-                    </div>
-                    {/* <Customtypewriter text={"Improve Customer Satisfaction"} className={"text-blue-900 dark:text-blue-900 text-xl sm:text-2xl lg:text-3xl"}/>
-                    <Customtypewriter text={"Engage your customers better"} className={"text-pink-800 dark:text-blue-500 text-xl sm:text-2xl lg:text-3xl"}/>
-                    <Customtypewriter text={"Reduce your Customer Support Cost"} className={"text-green-900 dark:text-blue-500 text-xl sm:text-2xl lg:text-3xl"}/> */}
-                    </div>
+                    <Highlight1/>
+                  
                 <StaticDemo/>
 
                 </div>
                 <div className="flex lg:flex-row flex-col md:justify-center md:items-center">  
                     <StaticDemo2/>
                     <div className="flex flex-col lg:mt-30 lg:order-last order-first">
-                    <Customtypewriter text={"Real time information"} className={"text-blue-1000 dark:text-blue-500 text-xl sm:text-2xl lg:text-3xl"}/>
-                    <Customtypewriter text={"Frequently asked questions"} className={"text-pink-900 dark:text-blue-500 text-xl sm:text-2xl lg:text-3xl"}/>
-                    <Customtypewriter text={"Professional and Prompt Responses   "} className={"text-green-800 dark:text-blue-500 text-xl sm:text-2xl lg:text-3xl"}/>
+                    <Highlight2/>
+                   
                     </div>
                 </div>
 
@@ -77,4 +66,4 @@ export default function Home() {
             <Footer/>
         </>
     );
-}
+}        
