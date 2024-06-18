@@ -6,11 +6,11 @@ import { WobbleCard } from "@/components/ui/wobble-card";
  
 export function WobbleBlogCards() {
   return (
-    <div className="grid grid-cols-1 gap-4 max-w-7xl mx-auto mr-2">
+    <div className="grid grid-cols-1 gap-2 sm:mr-10 sm:ml-10 lg:ml-40 lg:mr-40">
       <a href="/blog/rag">
         <WobbleCard
         containerClassName="ml-2 col-span-1 lg:col-span-1 h-full bg-pink-800 min-h-[50px] lg:min-h-[300px]"
-        className="ml-2"
+        className="ml-2 mr-2"
         >
         <div className="max-w-xs">
           <h2 className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">

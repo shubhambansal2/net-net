@@ -9,7 +9,7 @@ import StaticDemo from "@/components/staticdemo";
 import StaticDemo2 from "@/components/staticdemo2";
 import Customtypewriter from "@/components/customtypewriter";
 import {WobbleBlogCards} from "@/components/blogcards2"
-
+import IntegrationLogos from '@/components/logo-marquee';
 
 export default function Home() {
 
@@ -27,31 +27,48 @@ export default function Home() {
         }}
         className="relative flex flex-col gap-4 items-center justify-center">
             <main className="min-h-screen antialiased bg-grid-grey/[0.02] z-10">
-                <div className="flex flex-col justify-center items-center mt-5 min-h-[40rem]">
-                    {/* <div className="flex flex-col justify-center items-center space-y-4 px-2 mt-20">  */}
+                <div className="flex flex-col justify-center items-center mt-20 sm:mt-5  min-h-[40rem]">
+                        <div className="flex flex-col justify-center items-center space-y-4 px-2 mt-20 mb-40"> 
                             <Chatbothome/>
                             <ConversationalCommerce/>
-                    {/* </div> */}
+                        </div>
+                        <div className=" flex flex-col mb-40 justify-center items-center">
+                        <div className="text-md sm:text-lg md:text-lg lg:text:xl xl:text-xl text-neutral-600 dark:text-neutral-400">
+                        Built with Cutting Edge AI Technologies
+                        <br></br>
+                        <br></br>
+                        </div>
+                        <IntegrationLogos/>
+                        </div>
                 </div>
-                <div className="flex lg:flex-row flex-col">
-                <div className="flex flex-col lg:mt-60">
-                <Customtypewriter text={"Improve Customer Satisfaction"} className={"text-blue-900 dark:text-blue-900 text-xl sm:text-2xl lg:text-3xl"}/>
-                <Customtypewriter text={"Engage your customers better"} className={"text-pink-800 dark:text-blue-500 text-xl sm:text-2xl lg:text-3xl"}/>
-                <Customtypewriter text={"Reduce your Customer Support Cost"} className={"text-green-900 dark:text-blue-500 text-xl sm:text-2xl lg:text-3xl"}/>
-                </div>
+                <div className="flex lg:flex-row flex-col justify-center items-center mt-5">
+                    <div className="flex flex-col lg:mt-30">
+                    <div className="text-xl sm:text-2xl font-bold text-blue-900 dark:text-blue-900">
+                    Improve Customer Satisfaction
+                    </div>
+                    <div className="text-xl sm:text-2xl font-bold text-pink-900 dark:text-pink-900">
+                    Engage your customers better
+                    </div>
+                    <div className="text-xl sm:text-2xl font-bold text-green-900 dark:text-green-900">
+                    Reduce your Customer Support Cost
+                    </div>
+                    {/* <Customtypewriter text={"Improve Customer Satisfaction"} className={"text-blue-900 dark:text-blue-900 text-xl sm:text-2xl lg:text-3xl"}/>
+                    <Customtypewriter text={"Engage your customers better"} className={"text-pink-800 dark:text-blue-500 text-xl sm:text-2xl lg:text-3xl"}/>
+                    <Customtypewriter text={"Reduce your Customer Support Cost"} className={"text-green-900 dark:text-blue-500 text-xl sm:text-2xl lg:text-3xl"}/> */}
+                    </div>
                 <StaticDemo/>
-                
+
                 </div>
-                <div className="flex lg:flex-row flex-col">  
+                <div className="flex lg:flex-row flex-col md:justify-center md:items-center">  
                     <StaticDemo2/>
-                    <div className="flex flex-col lg:mt-60 lg:order-last order-first">
+                    <div className="flex flex-col lg:mt-30 lg:order-last order-first">
                     <Customtypewriter text={"Real time information"} className={"text-blue-1000 dark:text-blue-500 text-xl sm:text-2xl lg:text-3xl"}/>
                     <Customtypewriter text={"Frequently asked questions"} className={"text-pink-900 dark:text-blue-500 text-xl sm:text-2xl lg:text-3xl"}/>
                     <Customtypewriter text={"Professional and Prompt Responses   "} className={"text-green-800 dark:text-blue-500 text-xl sm:text-2xl lg:text-3xl"}/>
                     </div>
                 </div>
 
-                <div className=" mt-2">
+                <div className="mt-2 mr-10 ml-10">
                 <WobbleBlogCards/> 
                 </div> 
             </main>

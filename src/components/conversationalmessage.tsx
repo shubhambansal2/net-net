@@ -13,9 +13,9 @@ const ConversationalCommerce = () => {
     };
 
     return (
-      <div className="flex flex-col justify-center items-center my-4 ">
+      <div className="flex flex-col justify-center items-center my-4">
         <div>
-        <Typewriterelement />
+        <Typewriterelement/>
         <div className="text-md sm:text-2xl md:text-2xl lg:text:3xl xl:text-4xl mx-auto font-bold text-neutral-600 dark:text-neutral-400">
         Build
         <FlipWords words={words} color="text-blue-900" className="text-md sm:text-2xl md:text-2xl lg:text:3xl xl:text-4xl mx-auto font-bold"/> <br />
