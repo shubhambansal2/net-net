@@ -4,6 +4,7 @@ import Image from "next/image";
 import blueberrylogo from "../../../public/blueberryLogo.png";
 import IconLogo from '@/../public/logo3.svg';
 import TypewriterEffect from './typewriter';
+import Custombotform from "@/components/custombotform";
 
 // Generate a new session_id on page load
 let sessionId = 'A' + Math.floor(Math.random() * 1000000);
@@ -151,36 +152,7 @@ const Temp = () => {
 
     return (
         <div className="flex h-screen">
-            {/* Sidebar (div1) */}
-            <div className="w-1/5 flex items-center justify-center flex-col">
-                <div className="space-y-8 flex flex-col py-10">
-                    <label htmlFor="industry">Industry: </label>
-                    <select id="industry" value={selectedIndustry} onChange={handleIndustryChange}>
-                        <option value="">--Select Industry--</option>
-                        {Object.keys(data.chatbots).map((industry) => (
-                            <option key={industry} value={industry} className="text-center">{industry}</option>
-                        ))}
-                    </select>
-
-                    <label htmlFor="roles">Role: </label>
-                    <select id="roles" onChange={handleRoleChange}>
-                        <option value="">--Select Role--</option>
-                        {roles.map((role) => (
-                            <option key={role} value={role} className="text-center">{role}</option>
-                        ))}
-                    </select>
-                </div>
-
-                <div className=" bg-amber-200 py-10">
-                    <label htmlFor="rag">RAG Status: </label>
-                    <select id="rag" onChange={handleRagChange}>
-                        <option value="">--Select RAG Status--</option>
-                        <option value="true">True</option>
-                        <option value="false">False</option>
-                    </select>
-                </div>
-            </div>
-
+            <Custombotform/>
             {/* Main Content (div2) */}
             <div className="flex flex-col w-4/5 px-36">
                 {/* Chat with LLM */}
@@ -251,3 +223,33 @@ const Temp = () => {
 };
 
 export default Temp;
+
+
+{/* <div className="w-1/5 flex items-center justify-center flex-col">
+                <div className="space-y-8 flex flex-col py-10">
+                    <label htmlFor="industry">Industry: </label>
+                    <select id="industry" value={selectedIndustry} onChange={handleIndustryChange}>
+                        <option value="">--Select Industry--</option>
+                        {Object.keys(data.chatbots).map((industry) => (
+                            <option key={industry} value={industry} className="text-center">{industry}</option>
+                        ))}
+                    </select>
+
+                    <label htmlFor="roles">Role: </label>
+                    <select id="roles" onChange={handleRoleChange}>
+                        <option value="">--Select Role--</option>
+                        {roles.map((role) => (
+                            <option key={role} value={role} className="text-center">{role}</option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className=" bg-amber-200 py-10">
+                    <label htmlFor="rag">RAG Status: </label>
+                    <select id="rag" onChange={handleRagChange}>
+                        <option value="">--Select RAG Status--</option>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                    </select>
+                </div>
+            </div> */}
