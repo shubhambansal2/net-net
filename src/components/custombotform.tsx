@@ -25,7 +25,7 @@ export function Custombotform() {
             <Input id="companyname" placeholder="Blueberry AI" type="text" />
           </LabelInputContainer>
           <LabelInputContainer>
-            <Label htmlFor="botname">Your ChatBot's Name</Label>
+            <Label htmlFor="botname">Your ChatBot&apos; Name</Label>
             <Input id="botname" placeholder="Brix" type="text" />
           </LabelInputContainer>
         </div>
