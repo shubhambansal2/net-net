@@ -144,11 +144,22 @@ const Temp = () => {
         await handleSubmit();
     };
 
+    // const scrollToBottom = () => {
+    //     if (chatContainerRef.current) {
+    //         chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    //     }
+    // };
+
     const scrollToBottom = () => {
         if (chatContainerRef.current) {
-            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+          chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
         }
-    };
+      };
+    
+      // Scroll to bottom whenever conversation changes
+      useEffect(() => {
+        scrollToBottom();
+      }, [conversation]);
 
     return (
         <div className="flex h-screen">
@@ -156,42 +167,43 @@ const Temp = () => {
             {/* Main Content (div2) */}
             <div className="flex flex-col w-4/5 px-36">
                 {/* Chat with LLM */}
-                <div ref={chatContainerRef} className={`flex-1 ${showCards ? 'flex items-center justify-center' : 'items-start mt-40 chat'}`}>
+                <div ref={chatContainerRef} className={`flex-1 overflow-y-auto ${showCards ? 'flex items-center justify-center' : 'items-start mt-40 chat'}`}>
                     {conversation.map((item, index) => (
-                        <div key={index} className="flex flex-col items-center mb-2 w-full">
-                            <div className="question p-4 py-2 mb-4 shadow-md self-end rounded-full bg-gray-100">
-                                {item.question}
-                            </div>
-                            <div className="flex items-start w-full py-1">
-                                <div className="w-1/12 flex-shrink-0">
-                                    {/* Replace with your actual logo image */}
-                                    <Image src={IconLogo} alt="" />
+                    <div key={index} className="flex flex-col items-center mb-2 w-full">
+                    <div className="question p-4 py-2 mb-4 shadow-md self-end rounded-full bg-gray-100">
+                        {item.question}
+                    </div>
+                        <div className="flex items-start w-full py-1">
+                             <div className="w-1/12 flex-shrink-0">
+                                {/* Replace with your actual logo image */}
+                                <Image src={IconLogo} alt="" />
                                 </div>
-                                <div className={`answer rounded ${item.isTyping ? 'typewriter' : ' '} `}>
-                                    {item.isTyping ? (
-                                        <span className="typing">...</span>
-                                    ) : (
-                                        <TypewriterEffect text={item.answer || ''} typingSpeed={15} scrollToBottom={scrollToBottom}/>
-                                    )}
-                                </div>
+                                <div className={`answer rounded ${item.isTyping ? 'typewriter' : ' '}`}>
+                                {item.isTyping ? (
+                                    <span className="typing">...</span>
+                                ) : (
+                                    <TypewriterEffect text={item.answer || ''} typingSpeed={15} scrollToBottom={scrollToBottom} />
+                                )}
                             </div>
+                        </div>
+                    </div>
+                ))}
+
+                {showCards && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full justify-center">
+                    {(selectedIndustry && data.chatbots[selectedIndustry]?.query ? data.chatbots[selectedIndustry]?.query : data.chatbots['default']?.query)?.map((query, index) => (
+                        <div
+                        key={index}
+                        className="bg-white p-4 rounded-lg shadow-md cursor-pointer hover:bg-gray-100"
+                        onClick={handleCardClick}
+                        >
+                        {query}
                         </div>
                     ))}
-
-                    {showCards && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full justify-center">
-                            {(selectedIndustry && data.chatbots[selectedIndustry]?.query ? data.chatbots[selectedIndustry]?.query : data.chatbots['default']?.query)?.map((query, index) => (
-                                <div
-                                    key={index}
-                                    className="bg-white p-4 rounded-lg shadow-md cursor-pointer hover:bg-gray-100"
-                                    onClick={handleCardClick}
-                                >
-                                    {query}
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
+                    </div>
+                )}
+            </div>
+        
                 {/* Query Input */}
                 <div className="sticky bottom-2 bg-white p-2 border border-gray-300 rounded-full shadow-sm items-center">
                     <form onSubmit={handleSubmit} className="w-full flex">
