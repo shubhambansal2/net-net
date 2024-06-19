@@ -14,7 +14,6 @@ import Highlight1 from '@/components/highlighter1';
 import Highlight2 from '@/components/highlighter2';
 
 export default function Home() {
-
     return (
         <>  
             <Head/>
@@ -45,18 +44,14 @@ export default function Home() {
                 </div>
                 <div className="flex lg:flex-row flex-col justify-center items-center mt-5">
                     <Highlight1/>
-                  
                 <StaticDemo/>
-
                 </div>
                 <div className="flex lg:flex-row flex-col md:justify-center md:items-center">  
                     <StaticDemo2/>
                     <div className="flex flex-col lg:mt-30 lg:order-last order-first">
                     <Highlight2/>
-                   
                     </div>
                 </div>
-
                 <div className="mt-2 mr-10 ml-10">
                 <WobbleBlogCards/> 
                 </div> 
@@ -66,4 +61,4 @@ export default function Home() {
             <Footer/>
         </>
     );
-}        
+}
