@@ -33,6 +33,7 @@ const Temp = () => {
     const [isSubmittingFromCard, setIsSubmittingFromCard] = useState(false);
     const [data, setData] = useState<Data>({ chatbots: {} });
     const [rag, setRag] = useState<boolean>(false); // RAG status
+    const [isFormVisible, setIsFormVisible] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -166,6 +167,7 @@ const Temp = () => {
             <Custombotform/>
             {/* Main Content (div2) */}
             <div className="flex flex-col w-4/5 px-36">
+            
                 {/* Chat with LLM */}
                 <div ref={chatContainerRef} className={`flex-1 overflow-y-auto ${showCards ? 'flex items-center justify-center' : 'items-start mt-40 chat'}`}>
                     {conversation.map((item, index) => (
@@ -205,9 +207,9 @@ const Temp = () => {
             </div>
         
                 {/* Query Input */}
-                <div className="sticky bottom-2 bg-white p-2 border border-gray-300 rounded-full shadow-sm items-center">
+                <div className="sticky bottom-2 bg-white p-2 ml-20 border border-gray-300 rounded-full w-10/12 shadow-sm justify-center items-center">
                     <form onSubmit={handleSubmit} className="w-full flex">
-                        <div className="w-11/12 py-2">
+                        <div className="w-full py-2 px-4">
                             <input
                                 type="text"
                                 placeholder="Message Blueberry AI"
