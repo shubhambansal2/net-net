@@ -6,7 +6,7 @@ import { cn } from "@/utils/cn";
 import exp from "constants";
 import {
   IconBrandLinkedin,
-  IconBrandTwitter,
+  IconBrandFiverr
 } from "@tabler/icons-react";
  
 export function SignupFormDemo() {
@@ -65,19 +65,27 @@ export function SignupFormDemo() {
      className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
      type="submit"
    >
-     <IconBrandLinkedin className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-     <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-       Linkedin
-     </span>
-     <BottomGradient />
-   </button>
+    
+      <IconBrandLinkedin className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
+      
+      <span className="text-neutral-700 dark:text-neutral-300 text-sm">
+      <a href="https://www.fiverr.com/aiblueberry">
+        Fiverr        
+        </a>
+      </span>
+      
+      <BottomGradient />
+      </button>
+    
    <button
      className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
      type="submit"
    >
-     <IconBrandTwitter className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
+     <IconBrandFiverr className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
      <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-       Twitter
+      <a href="https://www.linkedin.com/company/neuraledge-ai/">
+        LinkedIn
+      </a>
      </span>
      <BottomGradient />
    </button>

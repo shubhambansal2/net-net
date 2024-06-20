@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/utils/cn";
@@ -9,6 +10,20 @@ export function Custombotform() {
     e.preventDefault();
     console.log("Form submitted");
   };
+  const [isWebsiteEnabled, setIsWebsiteEnabled] = useState(false);
+  const [websiteUrl, setWebsiteUrl] = useState('');
+  const [showWarning, setShowWarning] = useState(false);
+
+  const handleToggleWebsite = () => {
+    setIsWebsiteEnabled(!isWebsiteEnabled);
+  };
+  const handleWebsiteInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setWebsiteUrl(value);
+    // Show warning if there is input
+    setShowWarning(!!value);
+  };
+
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200 mt-40">
@@ -25,7 +40,7 @@ export function Custombotform() {
             <Input id="companyname" placeholder="Blueberry AI" type="text" />
           </LabelInputContainer>
           <LabelInputContainer>
-            <Label htmlFor="botname">Your ChatBot&apos; Name</Label>
+            <Label htmlFor="botname">Your ChatBot&apos;s Name</Label>
             <Input id="botname" placeholder="Brix" type="text" />
           </LabelInputContainer>
         </div>
@@ -37,10 +52,33 @@ export function Custombotform() {
           <Label htmlFor="role">Primary Role of Chatbot</Label>
           <Input id="companysize" placeholder="Customer Support" type="text" />
         </LabelInputContainer>
+        <div className="flex items-center mb-4">
+        <label htmlFor="toggleWebsite" className="text-sm font-medium text-black dark:text-white leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+          Add Website URL (Optional):
+        </label>
+        <input
+          id="toggleWebsite"
+          type="checkbox"
+          checked={isWebsiteEnabled}
+          onChange={handleToggleWebsite}
+        />
+      </div>
+      {isWebsiteEnabled && (
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="url">Website URL</Label>
-          <Input id="url" placeholder="www.aiblueberry.co" type="url" />
+          <Label htmlFor="url"></Label>
+          <Input id="url" 
+                 placeholder="www.aiblueberry.co"
+                 type="url"
+                 value={websiteUrl}
+                 onChange={handleWebsiteInputChange}/>
         </LabelInputContainer>
+        
+      )}
+      {showWarning && (
+            <p className="text-yellow-800 text-sm mt-2 font-bold">
+              Add a valid website, we will read all the content and make it available for your chatbot to refer
+            </p>
+          )}
         <button
           className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
           type="submit"
