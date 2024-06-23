@@ -1,6 +1,5 @@
 // models/Chatbot.js
-import mongoose, {models} from "mongoose";
-// const mongoose = require('mongoose');
+import mongoose, {Model, models} from "mongoose";
 
 const chatbotSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId, // Add the _id field
@@ -14,6 +13,14 @@ const chatbotSchema = new mongoose.Schema({
     },
 });
 
-const Chatbots = models.chatbots || mongoose.model('chatbots', chatbotSchema);
+let Chatbots: Model<any>;
+console.log("Models chatbot: " + models.chatbots);
+
+if (!models.chatbots) {
+    Chatbots = mongoose.model('chatbots', chatbotSchema);
+} else {
+    Chatbots = models.chatbots;
+}
+
 
 module.exports = Chatbots;

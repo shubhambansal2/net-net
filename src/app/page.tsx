@@ -3,62 +3,66 @@ import Head from './head';
 import ConversationalCommerce from '@/components/conversationalmessage';
 import {Chatbothome} from "@/components/chatbothomeui";
 import Footer from "@/components/Footer";
-import { AuroraBackground } from "@/components/ui/aurora-background";
-import { motion } from "framer-motion";
+import {AuroraBackground} from "@/components/ui/aurora-background";
+import {motion} from "framer-motion";
 import StaticDemo from "@/components/staticdemo";
 import StaticDemo2 from "@/components/staticdemo2";
-import Customtypewriter from "@/components/customtypewriter";
 import {WobbleBlogCards} from "@/components/blogcards2"
 import IntegrationLogos from '@/components/logo-marquee';
 import Highlight1 from '@/components/highlighter1';
 import Highlight2 from '@/components/highlighter2';
+import {Provider} from "react-redux";
+import {store} from "@/store";
 
 export default function Home() {
     return (
-        <>  
-            <Head/>
-            <AuroraBackground>
-            <motion.div
-        initial={{ opacity: 0.0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.2,
-          duration: 0.8,
-          ease: "easeInOut",
-        }}
-        className="relative flex flex-col gap-4 items-center justify-center">
-            <main className="min-h-screen antialiased bg-grid-grey/[0.02] z-10">
-                <div className="flex flex-col justify-center items-center mt-20 sm:mt-5  min-h-[40rem]">
-                        <div className="flex flex-col justify-center items-center space-y-4 px-2 mt-20 mb-40"> 
-                            <Chatbothome/>
-                            <ConversationalCommerce/>
-                        </div>
-                        <div className=" flex flex-col mb-40 justify-center items-center">
-                        <div className="text-md sm:text-lg md:text-lg lg:text:xl xl:text-xl text-neutral-600 dark:text-neutral-400">
-                        Built with Cutting Edge AI Technologies
-                        <br></br>
-                        <br></br>
-                        </div>
-                        <IntegrationLogos/>
-                        </div>
-                </div>
-                <div className="flex lg:flex-row flex-col justify-center items-center mt-5">
-                    <Highlight1/>
-                <StaticDemo/>
-                </div>
-                <div className="flex lg:flex-row flex-col md:justify-center md:items-center">  
-                    <StaticDemo2/>
-                    <div className="flex flex-col lg:mt-30 lg:order-last order-first">
-                    <Highlight2/>
-                    </div>
-                </div>
-                <div className="mt-2 mr-10 ml-10">
-                <WobbleBlogCards/> 
-                </div> 
-            </main>
-            </motion.div>
-            </AuroraBackground>
-            <Footer/>
+        <>
+            <Provider store={store}>
+                <Head/>
+                <AuroraBackground>
+                    <motion.div
+                        initial={{opacity: 0.0, y: 40}}
+                        whileInView={{opacity: 1, y: 0}}
+                        transition={{
+                            delay: 0.2,
+                            duration: 0.8,
+                            ease: "easeInOut",
+                        }}
+                        className="relative flex flex-col gap-4 items-center justify-center">
+                        <main className="min-h-screen antialiased bg-grid-grey/[0.02] z-10">
+                            <div className="flex flex-col justify-center items-center mt-20 sm:mt-5  min-h-[40rem]">
+                                <div className="flex flex-col justify-center items-center space-y-4 px-2 mt-20 mb-40">
+                                    <Chatbothome/>
+                                    <ConversationalCommerce/>
+                                </div>
+                                <div className=" flex flex-col mb-40 justify-center items-center">
+                                    <div
+                                        className="text-md sm:text-lg md:text-lg lg:text:xl xl:text-xl text-neutral-600 dark:text-neutral-400">
+                                        Built with Cutting Edge AI Technologies
+                                        <br></br>
+                                        <br></br>
+                                    </div>
+                                    <IntegrationLogos/>
+                                </div>
+                            </div>
+                            <div className="flex lg:flex-row flex-col justify-center items-center mt-5">
+                                <Highlight1/>
+                                <StaticDemo/>
+                            </div>
+                            <div className="flex lg:flex-row flex-col md:justify-center md:items-center">
+                                <StaticDemo2/>
+                                <div className="flex flex-col lg:mt-30 lg:order-last order-first">
+                                    <Highlight2/>
+                                </div>
+                            </div>
+                            <div className="mt-2 mr-10 ml-10">
+                                <WobbleBlogCards/>
+                            </div>
+                        </main>
+                    </motion.div>
+                </AuroraBackground>
+                <Footer/>
+            </Provider>
         </>
     );
 }

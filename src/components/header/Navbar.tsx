@@ -8,6 +8,17 @@ import blueberryLogo from '@/../public/logo2.svg';
 import Image from "next/image";
 import '@/components/header/style.css';
 
+const industries = [
+    {name: "Finance", query: "finance"},
+    {name: "Healthcare", query: "healthcare"},
+    {name: "Technology", query: "technology"}
+];
+
+const solutions = [
+    {name: "Chatbots", path: "/chatbot"},
+    {name: "AI Based Search", path: "/aisearch"}
+];
+
 function Navbar() {
     const [active, setActive] = useState<string | null>('');
     const [menuOpen, setMenuOpen] = useState(false);
@@ -17,7 +28,7 @@ function Navbar() {
     };
 
     return (
-        <header className="fixed  flex flex-col top-0 inset-x-0 lg:flex-row bg-white z-50 py-1 h-16 shadow-md">
+        <header className="fixed flex flex-col top-0 inset-x-0 lg:flex-row bg-white z-50 py-1 h-16 shadow-md">
             <div className="flex-1 flex justify-between items-center">
                 <Link href="/">
                     <Image src={blueberryLogo} alt="Blueberry AI" style={{ width: '240px' }} className="" priority={true} />
@@ -29,42 +40,42 @@ function Navbar() {
                         </svg>
                     </button>
                 </div>
-                </div>
+            </div>
             <div className={`flex-grow ${menuOpen ? 'block' : 'hidden'} lg:flex lg:items-center lg:justify-center px-4`}>
-            <Menu setActive={setActive}>
-            <div className={`flex-grow ${menuOpen ? 'block' : 'hidden'} lg:flex lg:items-center lg:justify-center px-4`}>
-            <Menu setActive={setActive}>
-                <div className="flex flex-col md:flex-row md:space-x-16 md:space-y-0">
-                    <div className="relative group">
-                        <MenuItem setActive={setActive} active={active} item="Industry" />
-                        <div className="absolute left-0 top-full hidden group-hover:flex flex-col bg-white shadow-md p-4 z-10 space-y-4 text-sm">
-                            <HoveredLink href="/industry/finance">Finance</HoveredLink>
-                            <HoveredLink href="/industry/healthcare">Healthcare</HoveredLink>
-                            <HoveredLink href="/industry/technology">Technology</HoveredLink>
+                <Menu setActive={setActive}>
+                    <div className="flex flex-col md:flex-row md:space-x-16 md:space-y-0">
+                        <div className="relative group">
+                            <MenuItem setActive={setActive} active={active} item="Industry" />
+                            <div className="absolute left-0 top-full hidden group-hover:flex flex-col bg-white shadow-md p-4 z-10 space-y-4 text-sm">
+                                {industries.map(industry => (
+                                    <HoveredLink key={industry.query} href={{pathname: "/chatbot", query: {industry: industry.query}}}>
+                                        {industry.name}
+                                    </HoveredLink>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                    <div className="relative group">
-                        <MenuItem setActive={setActive} active={active} item="Solutions" />
-                        <div className="absolute left-0 top-full hidden group-hover:flex flex-col bg-white shadow-md p-4 z-10 space-y-4 text-sm">
-                            <HoveredLink href="/chatbot">Chatbots</HoveredLink>
-                            <HoveredLink href="/aisearch">AI Based Search</HoveredLink>
+                        <div className="relative group">
+                            <MenuItem setActive={setActive} active={active} item="Solutions" />
+                            <div className="absolute left-0 top-full hidden group-hover:flex flex-col bg-white shadow-md p-4 z-10 space-y-4 text-sm">
+                                {solutions.map(solution => (
+                                    <HoveredLink key={solution.path} href={solution.path}>
+                                        {solution.name}
+                                    </HoveredLink>
+                                ))}
+                            </div>
                         </div>
+                        <Link href="/blog">
+                            <MenuItem setActive={setActive} active={active} item="Blog" />
+                        </Link>
+                        <Link href="/aboutus">
+                            <MenuItem setActive={setActive} active={active} item="About Us" />
+                        </Link>
+                        <Link href="/contactus">
+                            <MenuItem setActive={setActive} active={active} item="Contact Us" />
+                        </Link>
                     </div>
-                    <Link href="/blog">
-                        <MenuItem setActive={setActive} active={active} item="Blog" />
-                    </Link>
-                    <Link href="/aboutus">
-                        <MenuItem setActive={setActive} active={active} item="About Us" />
-                    </Link>
-                    <Link href="/contactus">
-                        <MenuItem setActive={setActive} active={active} item="Contact Us" />
-                    </Link>
-                </div>
-    </Menu>
-</div>
-
-    </Menu>
-</div>
+                </Menu>
+            </div>
             <div className="flex-1 hidden md:flex justify-center md:justify-end items-center">
                 {/* Empty div for centering */}
             </div>
