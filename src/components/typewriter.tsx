@@ -8,7 +8,7 @@ export function Typewriterelement() {
     },
     {
       text: "Large Language Models",
-      className: "text-blue-700 dark:text-blue-500 lg:text-4xl mx-auto"
+      className: "text-blue-900 dark:text-blue-900 lg:text-4xl mx-auto"
     }
   ];
   return (

@@ -8,7 +8,9 @@ import image3 from '@/../public/integrationlogos/MistralAI.png';
 import image4 from '@/../public/integrationlogos/MongoDb.png';
 import image5 from '@/../public/integrationlogos/Tailwind.png';
 import image6 from '@/../public/integrationlogos/Heroku_logo.png';
-import image7 from '@/../public/integrationlogos/reactjs_logo.png';
+import image7 from '@/../public/integrationlogos/React.png';
+import image8 from '@/../public/integrationlogos/OpenAi.png';
+// import image7 from '@/../public/integrationlogos/reactjs_logo.png';
 
 const photos = [
 image1,
@@ -18,6 +20,7 @@ image4,
 image5,
 image6,
 image7,
+image8
 ];
 
 const Photo = styled.img`
@@ -37,7 +40,7 @@ const IntegrationLogos = () => (
         onInit={() => {}}
         onFinish={() => {}}
       >
-        {times(7, Number).map((i) => (
+        {times(8, Number).map((i) => (
           <Photo key={i} src={photos[i].src} style={{ 
             marginLeft: "70px", }}  />
         ))}
