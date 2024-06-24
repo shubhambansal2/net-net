@@ -8,17 +8,15 @@ import {store} from "@/store";
 
 
 export default function ChatbotPage() {
-
-    // @ts-ignore
-    let industryParam = useSearchParams().get('industry') ;
-    if(!industryParam) {
-        industryParam = "default";
-    }
+    const industryParam = useSearchParams().get('industry') ;
+    // if(!industryParam) {
+    //     industryParam = "default";
+    // }
 
     return (
         <>
             <Provider store={store}>
-                <Chat industry = {industryParam}/>
+                <Chat industry={industryParam ?? null}/>
             </Provider>
         </>
     );
