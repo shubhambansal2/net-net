@@ -12,10 +12,12 @@ export function Typewriterelement() {
     }
   ];
   return (
-    <div className="flex flex-col items-center justify-center mb-4 min-w-96">
+    <div className="flex flex-col mb-4 min-w-96">
+      <div className="justify-center items-center ml-10 lg:ml-60">
       <p className="text-neutral-800 dark:text-neutral-200 text-sm mb-10">
         Power your business with the latest AI technology
       </p>
+      </div>
       <TypewriterEffectSmooth words={words} />
     </div>
   );

@@ -31,11 +31,11 @@ export default function Home() {
                         className="relative flex flex-col gap-4 items-center justify-center">
                         <main className="min-h-screen antialiased bg-grid-grey/[0.02] z-10">
                             <div className="flex flex-col justify-center items-center mt-20 sm:mt-5  min-h-[40rem]">
-                                <div className="flex flex-col justify-center items-center space-y-4 px-2 mt-20 mb-40">
+                                <div className="flex flex-col space-y-4  mt-20 mb-40">
                                     <Chatbothome/>
                                     <ConversationalCommerce/>
                                 </div>
-                                <div className=" flex flex-col mb-40 justify-center items-center">
+                                <div className=" flex flex-col mb-40">
                                     <div
                                         className="text-md sm:text-lg md:text-lg lg:text:xl xl:text-xl text-neutral-600 dark:text-neutral-400">
                                         Built with Cutting Edge AI Technologies
