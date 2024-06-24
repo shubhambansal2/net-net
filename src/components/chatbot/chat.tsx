@@ -141,7 +141,8 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
 
     const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
         if (event) event.preventDefault();
-        // if (!inputText) return;
+
+        if (!inputText && !uploadingEmbeddings) return;
         if(!uploadingEmbeddings) {
             setConversation(prevConversation => [
                 ...prevConversation,
