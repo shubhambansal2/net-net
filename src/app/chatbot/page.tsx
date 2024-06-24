@@ -1,20 +1,25 @@
 'use client'
 
-import React, {useEffect, useRef, useState} from 'react'
-import Response from "@/app/chatbot/Response";
-import Head from '@/app/head';
-import data from '@/../public/chatbot.json'
+import React from 'react'
 import Chat from '@/components/chatbot/chat'
-import Temp from '@/components/chatbot/temp'
-import RootLayout from '@/app/layout';
+import {useSearchParams} from 'next/navigation';
+import {Provider} from "react-redux";
+import {store} from "@/store";
 
 
 export default function ChatbotPage() {
+
+    // @ts-ignore
+    let industryParam = useSearchParams().get('industry') ;
+    if(!industryParam) {
+        industryParam = "default";
+    }
+
     return (
         <>
-        
-            <Chat/>
-        
+            <Provider store={store}>
+                <Chat industry = {industryParam}/>
+            </Provider>
         </>
     );
 }
