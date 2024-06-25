@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Response from "@/app/chatbot/Response";
+import React, {useEffect, useRef, useState} from 'react';
+import ChatBackend from "@/app/chatbot/ChatBackend";
 import Image from "next/image";
 import IconLogo from '@/../public/logo3.svg';
 import TypewriterEffect from './typewriter';
 import Custombotform from "@/components/custombotform";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store";
-
+import UploadEmbeddings from "@/app/chatbot/UploadEmbeddings";
 // Generate a new session_id on page load
 let sessionId = 'A' + Math.floor(Math.random() * 1000000);
 console.log(sessionId)
@@ -23,7 +23,7 @@ interface Data {
 }
 
 interface ChatProps {
-    industry: string;
+    industry: string | null;
 }
 
 const Temp: React.FC<ChatProps> = ({industry}) => {
@@ -35,9 +35,9 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
         isTyping?: boolean
     }[]>([]);
     const chatContainerRef = useRef<HTMLDivElement>(null);
-    const [selectedIndustry, setSelectedIndustry] = useState<string>(industry || '');
-    const [roles, setRoles] = useState<string[]>(['default']);
-    const [selectedRole, setSelectedRole] = useState<string>(roles[0] || 'default');
+    const [selectedIndustry, setSelectedIndustry] = useState<string>('');
+    const [roles, setRoles] = useState<string[]>([]);
+    const [selectedRole, setSelectedRole] = useState<string>('Customer Support');
     const [showCards, setShowCards] = useState(true);
     const [isSubmittingFromCard, setIsSubmittingFromCard] = useState(false);
     const [data, setData] = useState<Data>({chatbots: {}});
@@ -45,11 +45,22 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
     const [isFormVisible, setIsFormVisible] = useState(true);
     const [isStateUpdated, setIsStateUpdated] = useState(false); // New state to track state updates
     // const {inputValue} = useInputValue();
+    const [titleAndRole, setTitleAndRole] = useState('');
+    const [websiteURL, setWebsiteURL] = useState('');
     const inputValue = useSelector((state: RootState) => state.inputValue.value);
+    const inputIndustry = useSelector((state: RootState) => state.chatbot.industry);
+    const inputSelectedRole = useSelector((state: RootState) => state.chatbot.selectedRole);
+    const inputChatbotName = useSelector((state: RootState) => state.chatbot.chatbotName);
+    const inputOrganisationName = useSelector((state: RootState) => state.chatbot.organisationName);
+    const [manualChatbot, setManualChatbot] = useState(false);
+    const [uploadingEmbeddings, setUploadEmbeddings] = useState(false);
+    const [websiteURLState, setWebsiteURLState] = useState(false);
+    // const location = useLocation();
+    const inputWebsiteURL = useSelector((state: RootState) => state.chatbot.websiteURL);
 
     useEffect(() => {
         if (inputValue) {
-            // console.log("EXECUTING...");
+            console.log("EXECUTING INPUT VALUE...");
             setInputText(inputValue);
             setIsStateUpdated(true); // Indicate that the state update is triggered
         }
@@ -60,14 +71,15 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
             handleSubmit(); // Call handleSubmit once state is updated
             setIsStateUpdated(false); // Reset the state update indicator
         }
-
-
     }, [isStateUpdated]);
 
 
     useEffect(() => {
+        console.log("Industry : ", industry);
+
+        // @ts-ignore
         setSelectedIndustry(industry);
-        setSelectedRole('default');
+        // setSelectedRole('default');
         setConversation([]);
         setShowCards(true);
     }, [industry]);
@@ -102,52 +114,65 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
         fetchData();
     }, []);
 
-    const handleIndustryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const industry = event.target.value;
-        setSelectedIndustry(industry);
-        if (industry && data.chatbots.hasOwnProperty(industry)) {
-            // @ts-ignore
-            setRoles(data.chatbots[industry]?.role);
-        } else {
-            setRoles([]);
-        }
-        setConversation([]);
-        setShowCards(true);
-        sessionId = 'A' + Math.floor(Math.random() * 1000000);
-        console.log("New session ID for changing industry:", sessionId);
-    };
+    // const handleIndustryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    //     const industry = event.target.value;
+    //     setSelectedIndustry(industry);
+    //     if (industry && data.chatbots.hasOwnProperty(industry)) {
+    //         // @ts-ignore
+    //         setRoles(data.chatbots[industry]?.role);
+    //     } else {
+    //         setRoles([]);
+    //     }
+    //     setConversation([]);
+    //     setShowCards(true);
+    //     sessionId = 'A' + Math.floor(Math.random() * 1000000);
+    //     console.log("New session ID for changing industry:", sessionId);
+    // };
 
-    const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedRole(event.target.value);
-    };
+    // const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    //     setSelectedRole(event.target.value);
+    // };
 
-    const handleRagChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setRag(event.target.value === 'true');
-        sessionId = 'A' + Math.floor(Math.random() * 1000000);
-        console.log("New session ID for changing RAG Status:", sessionId);
-    };
+    // const handleRagChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    //     setRag(event.target.value === 'true');
+    //     sessionId = 'A' + Math.floor(Math.random() * 1000000);
+    //     console.log("New session ID for changing RAG Status:", sessionId);
+    // };
 
     const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
         if (event) event.preventDefault();
-        if (!inputText) return;
 
-        setConversation(prevConversation => [
-            ...prevConversation,
-            {question: inputText, answer: null, isTyping: true}
-        ]);
+        if (!inputText && !uploadingEmbeddings) return;
+        if(!uploadingEmbeddings) {
+            setConversation(prevConversation => [
+                ...prevConversation,
+                {question: inputText, answer: null, isTyping: true}
+            ]);
+        }
+
         setIsLoading(true);
         setShowCards(false);
         setInputText('');
-
+        console.log("Reaching huandl");
         try {
-            const response = await Response(inputText, sessionId, selectedIndustry, selectedRole, rag);
-            setConversation(prevConversation =>
-                prevConversation.map((item, index) =>
-                    index === prevConversation.length - 1
-                        ? {...item, answer: response, isTyping: false}
-                        : item
-                )
-            );
+            if(uploadingEmbeddings) {
+                console.log("Starting with embedding uploads");
+                const response = await UploadEmbeddings(websiteURL);
+                console.log("Embedding response: ", response);
+                console.log("Completed with embedding uploads");
+                setRag(true);
+                setUploadEmbeddings(false);
+            } else {
+                const response = await ChatBackend(inputText, sessionId, selectedIndustry, selectedRole, rag);
+                setConversation(prevConversation =>
+                    prevConversation.map((item, index) =>
+                        index === prevConversation.length - 1
+                            ? {...item, answer: response, isTyping: false}
+                            : item
+                    )
+                );
+            }
+
         } catch (error) {
             console.error("Error fetching response:", error);
         } finally {
@@ -178,6 +203,7 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
         }
     }, [isSubmittingFromCard, inputText, handleSubmit]);
 
+    // On selecting card, start the chat
     const handleCardClick: React.MouseEventHandler<HTMLDivElement> = async (event) => {
         const query = (event.target as HTMLDivElement).textContent || '';
         setInputText(query);
@@ -185,13 +211,61 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
         await handleSubmit();
     };
 
+    // Generate message based on industry and role
+    const getMessage = () => {
+        console.log("Running getMessage");
+        if(industry) {
+            setTitleAndRole(`Welcome to ${industry} chatbot`);
+        } else if (inputIndustry && inputSelectedRole && inputChatbotName && inputOrganisationName) {
+            setTitleAndRole(`Introducing ${inputChatbotName}, your dedicated virtual assistant designed specifically for the ${inputIndustry} industry. Whether you're a ${inputSelectedRole} seeking information or assistance, ${inputChatbotName} is here to enhance your experience and streamline your \n interactions.`);
+            // setTitleAndRole(`This chatbot is designed for the ${inputIndustry} industry with the role of ${inputSelectedRole}, named ${inputChatbotName}, for the organisation ${inputOrganisationName}.`);
+        } else {
+            setTitleAndRole('Welcome to Blueberry AI Chatbot');
+        }
+    };
+
+    useEffect(() => {
+        getMessage();
+    }, [industry]);
+
+    // Get Custom title based on chatbot form inputs
+    useEffect(() => {
+        if (inputIndustry && inputSelectedRole && inputChatbotName && inputOrganisationName) {
+            getMessage();
+            setManualChatbot(true);
+            console.log("Running Form code...");
+            setSelectedIndustry(inputIndustry);
+            setSelectedRole(inputSelectedRole);
+        }
+    }, [inputIndustry, inputSelectedRole, inputOrganisationName, inputChatbotName, selectedIndustry, selectedRole]);
+
+    // Website Embeddings upload
+    useEffect(() => {
+        if(inputWebsiteURL) {
+            setUploadEmbeddings(true);
+            setWebsiteURLState(true);
+            console.log("Running website hook");
+        }
+    }, [inputWebsiteURL]);
+
+    useEffect(() => {
+        if(websiteURLState) {
+            console.log("Reached websiteURL hooks");
+            handleSubmit();
+            setUploadEmbeddings(false);
+            setWebsiteURLState(false);
+        }
+    }, [websiteURLState]);
+
     return (
-        <div className="flex h-screen">
+        <div className="flex-col h-screen lg:flex lg:flex-row" >
             <Custombotform/>
             {/* Main Content (div2) */}
             <div className="flex flex-col w-4/5 px-36">
-                <div className="my-20 bg-gray-100 text-center justify-center py-2">
-                    <p> Chatbot is for the {industry} industry with {selectedRole} role. </p>
+                <div className="my-20 bg-blue-200 text-center justify-center py-2">
+                    <p>
+                        {titleAndRole}
+                    </p>
                 </div>
                 {/* Chat with LLM */}
                 <div ref={chatContainerRef}
@@ -219,21 +293,34 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
                     ))}
 
                     {showCards && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full justify-center">
-                            {(selectedIndustry && data.chatbots[selectedIndustry]?.query ? data.chatbots[selectedIndustry]?.query : data.chatbots['default']?.query)?.map((query, index) => (
-                                <div
-                                    key={index}
-                                    className="bg-white p-4 rounded-lg shadow-md cursor-pointer hover:bg-gray-100"
-                                    onClick={handleCardClick}
-                                >
-                                    {query}
+                        <div className="w-full justify-center">
+                            {manualChatbot ? (
+                                <div className="bg-blue-200 p-4 rounded-lg shadow-md text-center">
+                                    Chatbot is ready, you can chat.
                                 </div>
-                            ))}
+                            ) : (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {(selectedIndustry && data.chatbots[selectedIndustry]?.query
+                                            ? data.chatbots[selectedIndustry]?.query
+                                            : data.chatbots['default']?.query
+                                    )?.map((query, index) => (
+                                        <div
+                                            key={index}
+                                            className="bg-white p-4 rounded-lg shadow-md cursor-pointer hover:bg-gray-100"
+                                            onClick={handleCardClick}
+                                        >
+                                            {query}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     )}
+
                 </div>
                 {/* Query Input */}
-                <div className="sticky bottom-2 bg-white p-2 ml-20 border border-gray-300 rounded-full w-10/12 shadow-sm justify-center items-center">
+                <div
+                    className="sticky bottom-2 bg-white p-2 mx-20 border border-gray-300 rounded-full shadow-sm justify-center items-center">
                     <form onSubmit={handleSubmit} className="w-full flex">
                         <div className="self-end flex-1">
                             {/*    Creating equal space*/}
