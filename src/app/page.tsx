@@ -35,7 +35,7 @@ export default function Home() {
                                     <Chatbothome/>
                                     <ConversationalCommerce/>
                                 </div>
-                                <div className=" flex flex-col mb-40">
+                                <div className=" flex flex-col items-center justify-center mb-40">
                                     <div
                                         className="text-md sm:text-lg md:text-lg lg:text:xl xl:text-xl text-neutral-600 dark:text-neutral-400">
                                         Built with Cutting Edge AI Technologies
