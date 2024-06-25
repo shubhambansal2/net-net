@@ -148,7 +148,7 @@ export const TypewriterEffectSmooth = ({
   };
  
   return (
-    <div className={cn("flex space-x-1", className)}>
+    <div className={cn("flex", className)}>
       {isTyping ? (
       <motion.div
         className="overflow-hidden pb-2"
