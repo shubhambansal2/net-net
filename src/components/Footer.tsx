@@ -37,7 +37,7 @@ function Footer() {
                 </div>
                 <div>
                     <h2 className="text-white text-lg font-semibold mb-4">Contact Us</h2>
-                    <p>Email: blueberryai@gmail.com</p>
+                    <p>Email: aiblueberry.co@gmail.com</p>
                     <p>Phone: (+91)-9001696768</p>
                 </div>
             </div>

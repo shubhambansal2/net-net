@@ -59,6 +59,24 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
     const inputWebsiteURL = useSelector((state: RootState) => state.chatbot.websiteURL);
 
     useEffect(() => {
+        // Reset all states here
+        setInputText('');
+        setIsLoading(false);
+        setConversation([]);
+        // @ts-ignore
+        setSelectedIndustry(industry);
+        setRoles([]);
+        setSelectedRole('Customer Support');
+        setShowCards(true);
+        setIsSubmittingFromCard(false);
+
+        // If you have any cleanup to do, return a function from here
+        return () => {
+            // Cleanup code here
+        };
+    }, []);
+
+    useEffect(() => {
         if (inputValue) {
             console.log("EXECUTING INPUT VALUE...");
             setInputText(inputValue);
@@ -153,11 +171,13 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
         setIsLoading(true);
         setShowCards(false);
         setInputText('');
-        console.log("Reaching huandl");
+
         try {
+
             if(uploadingEmbeddings) {
                 console.log("Starting with embedding uploads");
-                const response = await UploadEmbeddings(websiteURL);
+                console.log("website url: ", inputWebsiteURL);
+                const response = await UploadEmbeddings(inputWebsiteURL);
                 console.log("Embedding response: ", response);
                 console.log("Completed with embedding uploads");
                 setRag(true);
