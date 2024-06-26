@@ -12,7 +12,6 @@ export default function ChatbotPage() {
     // if(!industryParam) {
     //     industryParam = "default";
     // }
-
     return (
         <>
             <Provider store={store}>
