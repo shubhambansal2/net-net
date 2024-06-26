@@ -4,30 +4,42 @@ import Image from "next/image";
 import IconLogo from '@/../public/logo3.svg';
 import TypewriterEffect from './typewriter';
 import Custombotform from "@/components/custombotform";
+import { MultiStepLoader as Loader } from "@/components/ui/multi-step-loader";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store";
 import UploadEmbeddings from "@/app/chatbot/UploadEmbeddings";
 // Generate a new session_id on page load
 let sessionId = 'A' + Math.floor(Math.random() * 1000000);
 console.log(sessionId)
-
 interface ChatbotData {
     role: string[];
     query?: string[]; // Make query optional since Fintech doesn't have it
 }
-
 interface Data {
     chatbots: {
         [key: string]: ChatbotData; // Index signature allows any string as a key
     };
 }
-
 interface ChatProps {
     industry: string | null;
 }
 
-const Temp: React.FC<ChatProps> = ({industry}) => {
+const loadingStates = [
+    {
+      text: "Fetching Required Information for Retrieval",
+    },
+    {
+      text: "Preparing the Chatbot for Interaction",
+    },
+    {
+      text: "Loading Chatbot Interface",
+    },
+  ];
+
+const Temp: React.FC<ChatProps> = ({industry}) => 
+    {
     const [inputText, setInputText] = useState('');
+    const [loading, setLoading] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [conversation, setConversation] = useState<{
         question: string,
@@ -94,7 +106,6 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
 
     useEffect(() => {
         console.log("Industry : ", industry);
-
         // @ts-ignore
         setSelectedIndustry(industry);
         // setSelectedRole('default');
@@ -108,6 +119,7 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
                 const response = await fetch('/api/chatbots');
                 const jsonData = await response.json();
                 const formattedData = {chatbots: {}};
+                console.log("jsonData: ", jsonData);
 
                 jsonData.forEach((item: any) => {
                     const industry = Object.keys(item)[1]; // Skip _id field
@@ -176,14 +188,18 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
 
             if(uploadingEmbeddings) {
                 console.log("Starting with embedding uploads");
+                setLoading(true);
+                setConversation([]);
                 console.log("website url: ", inputWebsiteURL);
                 const response = await UploadEmbeddings(inputWebsiteURL);
                 console.log("Embedding response: ", response);
                 console.log("Completed with embedding uploads");
+                setLoading(false);
                 setRag(true);
                 setUploadEmbeddings(false);
             } else {
                 const response = await ChatBackend(inputText, sessionId, selectedIndustry, selectedRole, rag);
+                
                 setConversation(prevConversation =>
                     prevConversation.map((item, index) =>
                         index === prevConversation.length - 1
@@ -251,6 +267,12 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
     // Get Custom title based on chatbot form inputs
     useEffect(() => {
         if (inputIndustry && inputSelectedRole && inputChatbotName && inputOrganisationName) {
+            setLoading(true);
+            setConversation([]);
+            setTimeout(() => {
+                setLoading(false);
+                console.log("Loading set to false");
+            }, 6000);
             getMessage();
             setManualChatbot(true);
             console.log("Running Form code...");
@@ -282,6 +304,7 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
             <Custombotform/>
             {/* Main Content (div2) */}
             <div className="flex flex-col w-4/5 px-36">
+            <Loader loadingStates={loadingStates} loading={loading} duration={2000} loop = {false}/>
                 <div className="my-20 bg-blue-200 text-center justify-center py-2">
                     <p>
                         {titleAndRole}
