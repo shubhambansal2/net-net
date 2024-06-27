@@ -4,40 +4,44 @@ import Image from "next/image";
 import IconLogo from '@/../public/logo3.svg';
 import TypewriterEffect from './typewriter';
 import Custombotform from "@/components/custombotform";
-import { MultiStepLoader as Loader } from "@/components/ui/multi-step-loader";
+import {MultiStepLoader as Loader} from "@/components/ui/multi-step-loader";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store";
 import UploadEmbeddings from "@/app/chatbot/UploadEmbeddings";
+import './chat.css';
+
 // Generate a new session_id on page load
 let sessionId = 'A' + Math.floor(Math.random() * 1000000);
 console.log(sessionId)
+
 interface ChatbotData {
     role: string[];
     query?: string[]; // Make query optional since Fintech doesn't have it
 }
+
 interface Data {
     chatbots: {
         [key: string]: ChatbotData; // Index signature allows any string as a key
     };
 }
+
 interface ChatProps {
     industry: string | null;
 }
 
 const loadingStates = [
     {
-      text: "Fetching Required Information for Retrieval",
+        text: "Fetching Required Information for Retrieval",
     },
     {
-      text: "Preparing the Chatbot for Interaction",
+        text: "Preparing the Chatbot for Interaction",
     },
     {
-      text: "Loading Chatbot Interface",
+        text: "Loading Chatbot Interface",
     },
-  ];
+];
 
-const Temp: React.FC<ChatProps> = ({industry}) => 
-    {
+const Temp: React.FC<ChatProps> = ({industry}) => {
     const [inputText, setInputText] = useState('');
     const [loading, setLoading] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -69,6 +73,8 @@ const Temp: React.FC<ChatProps> = ({industry}) =>
     const [websiteURLState, setWebsiteURLState] = useState(false);
     // const location = useLocation();
     const inputWebsiteURL = useSelector((state: RootState) => state.chatbot.websiteURL);
+
+
 
     useEffect(() => {
         // Reset all states here
@@ -173,7 +179,7 @@ const Temp: React.FC<ChatProps> = ({industry}) =>
         if (event) event.preventDefault();
 
         if (!inputText && !uploadingEmbeddings) return;
-        if(!uploadingEmbeddings) {
+        if (!uploadingEmbeddings) {
             setConversation(prevConversation => [
                 ...prevConversation,
                 {question: inputText, answer: null, isTyping: true}
@@ -186,7 +192,7 @@ const Temp: React.FC<ChatProps> = ({industry}) =>
 
         try {
 
-            if(uploadingEmbeddings) {
+            if (uploadingEmbeddings) {
                 console.log("Starting with embedding uploads");
                 setLoading(true);
                 setConversation([]);
@@ -199,7 +205,7 @@ const Temp: React.FC<ChatProps> = ({industry}) =>
                 setUploadEmbeddings(false);
             } else {
                 const response = await ChatBackend(inputText, sessionId, selectedIndustry, selectedRole, rag);
-                
+
                 setConversation(prevConversation =>
                     prevConversation.map((item, index) =>
                         index === prevConversation.length - 1
@@ -250,7 +256,7 @@ const Temp: React.FC<ChatProps> = ({industry}) =>
     // Generate message based on industry and role
     const getMessage = () => {
         console.log("Running getMessage");
-        if(industry) {
+        if (industry) {
             setTitleAndRole(`Welcome to ${industry} chatbot`);
         } else if (inputIndustry && inputSelectedRole && inputChatbotName && inputOrganisationName) {
             setTitleAndRole(`Introducing ${inputChatbotName}, your dedicated virtual assistant designed specifically for the ${inputIndustry} industry. Whether you're a ${inputSelectedRole} seeking information or assistance, ${inputChatbotName} is here to enhance your experience and streamline your \n interactions.`);
@@ -283,7 +289,7 @@ const Temp: React.FC<ChatProps> = ({industry}) =>
 
     // Website Embeddings upload
     useEffect(() => {
-        if(inputWebsiteURL) {
+        if (inputWebsiteURL) {
             setUploadEmbeddings(true);
             setWebsiteURLState(true);
             console.log("Running website hook");
@@ -291,7 +297,7 @@ const Temp: React.FC<ChatProps> = ({industry}) =>
     }, [inputWebsiteURL]);
 
     useEffect(() => {
-        if(websiteURLState) {
+        if (websiteURLState) {
             console.log("Reached websiteURL hooks");
             handleSubmit();
             setUploadEmbeddings(false);
@@ -299,13 +305,47 @@ const Temp: React.FC<ChatProps> = ({industry}) =>
         }
     }, [websiteURLState]);
 
+    const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' && window.innerWidth <= 767);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(typeof window !== 'undefined' && window.innerWidth <= 767);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup function to remove the event listener when the component unmounts
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []); // Empty dependency array means this effect runs once on mount and cleanup on unmount
+
+    const [isFormOpen, setIsFormOpen] = useState(false);
+
+    const toggleForm = () => {
+        setIsFormOpen(!isFormOpen);
+    };
+
     return (
-        <div className="flex-col h-screen lg:flex lg:flex-row" >
-            <Custombotform/>
+        <div className="flex-col h-screen lg:flex lg:flex-row">
+            <div className="custom-bot-form-button">
+                {isMobile ? (
+                    <>
+                        <div className="flex flex-col justify-between mt-20">
+                            <button onClick={toggleForm}>
+                                {isFormOpen ? 'Close Custombotform' : 'Open Custombotform'}
+                            </button>
+                            {isFormOpen && <Custombotform />}
+                        </div>
+                    </>
+                ) : (
+                    <Custombotform />
+                )}
+            </div>
             {/* Main Content (div2) */}
-            <div className="flex flex-col w-4/5 px-36">
-            <Loader loadingStates={loadingStates} loading={loading} duration={2000} loop = {false}/>
-                <div className="my-20 bg-blue-200 text-center justify-center py-2">
+            <div className="chatbot-component flex flex-col w-4/5 px-36">
+                <Loader loadingStates={loadingStates} loading={loading} duration={2000} loop={false}/>
+                <div className="title-info my-20 bg-blue-200 text-center justify-center py-2">
                     <p>
                         {titleAndRole}
                     </p>
@@ -363,7 +403,7 @@ const Temp: React.FC<ChatProps> = ({industry}) =>
                 </div>
                 {/* Query Input */}
                 <div
-                    className="sticky bottom-2 bg-white p-2 mx-20 border border-gray-300 rounded-full shadow-sm justify-center items-center">
+                    className="input-form sticky bottom-2 bg-white p-2 mx-20 border border-gray-300 rounded-full shadow-sm justify-center items-center">
                     <form onSubmit={handleSubmit} className="w-full flex">
                         <div className="self-end flex-1">
                             {/*    Creating equal space*/}

@@ -9,7 +9,7 @@ export function WobbleBlogCards() {
     <div className="grid grid-cols-1 gap-2 sm:mr-10 sm:ml-10 lg:ml-40 lg:mr-40">
       <a href="/blog/rag">
         <WobbleCard
-        containerClassName="ml-2 col-span-1 lg:col-span-1 h-full bg-pink-800 min-h-[50px] lg:min-h-[300px]"
+        containerClassName="ml-2 col-span-1 lg:col-span-1 h-full bg-pink-800 min-h-[50px] lg:min-h-[300px] teal"
         className="ml-2 mr-2"
         >
         <div className="max-w-xs">
@@ -30,7 +30,7 @@ export function WobbleBlogCards() {
        </WobbleCard>
       </a>
       <a href="/chatbot">
-       <WobbleCard containerClassName="ml-2 col-span-1 lg:col-span-1 h-full bg-red-900 min-h-[50px] lg:min-h-[300px]">
+       <WobbleCard containerClassName="ml-2 col-span-1 lg:col-span-1 h-full bg-red-900 min-h-[50px] lg:min-h-[300px] coral">
         <div className="max-w-sm">
           <h2 className="max-w-sm md:max-w-lg  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
             Experience the blazing-fast cutting-edge state of the art Blueberry AI Chatbots
@@ -49,7 +49,7 @@ export function WobbleBlogCards() {
        </WobbleCard>
        </a>
       <a href="/contactus">
-      <WobbleCard containerClassName="ml-2 col-span-1 lg:col-span-1 h-full bg-blue-900 min-h-[50px] lg:min-h-[300px]">
+      <WobbleCard containerClassName="ml-2 col-span-1 lg:col-span-1 h-full min-h-[50px] lg:min-h-[300px] slate-blue">
         <h2 className="max-w-80  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
           Integrate an amazing chatbot with your website, Reach out to us
         </h2>

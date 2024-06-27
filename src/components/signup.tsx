@@ -73,7 +73,7 @@ return (
                 </LabelInputContainer>
                 <LabelInputContainer>
                     <Label htmlFor="email">Email Address</Label>
-                    <Input id="email" name="email" placeholder="blueberryai@gmail.com" type="text"/>
+                    <Input id="email" name="email" placeholder="aiblueberry.co@gmail.com" type="text"/>
                 </LabelInputContainer>
             </div>
             <LabelInputContainer className="mb-4">

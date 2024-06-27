@@ -75,3 +75,22 @@
       @apply bg-background text-foreground;
     }
   }
+
+.teal {
+  background-color: #008080;
+}
+
+.coral {
+  background-color: #FF7F50;
+}
+
+.slate-blue {
+  background-color: #6A5ACD;
+}
+
+/*.homepage-theme {*/
+/*  background-color: #B4D4FF;*/
+/*  !*F1F8E8*!*/
+/*  !*BBE9FF*!*/
+/*!*#87CEFA;*!*/
+/*}*/

@@ -17,9 +17,10 @@ import {store} from "@/store";
 export default function Home() {
     return (
         <>
-            <Provider store={store}>
-                <Head/>
-                <AuroraBackground>
+            <div className="homepage-theme">
+                <Provider store={store}>
+                    <Head/>
+                    <AuroraBackground className="homepage-theme">
                     <motion.div
                         initial={{opacity: 0.0, y: 40}}
                         whileInView={{opacity: 1, y: 0}}
@@ -60,9 +61,10 @@ export default function Home() {
                             </div>
                         </main>
                     </motion.div>
-                </AuroraBackground>
-                <Footer/>
-            </Provider>
+                    </AuroraBackground>
+                    <Footer/>
+                </Provider>
+            </div>
         </>
     );
 }
