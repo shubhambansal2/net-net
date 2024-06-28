@@ -204,7 +204,7 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
                 setRag(true);
                 setUploadEmbeddings(false);
             } else {
-                const response = await ChatBackend(inputText, sessionId, selectedIndustry, selectedRole, rag);
+                const response = await ChatBackend(inputText, sessionId, selectedIndustry, selectedRole, inputChatbotName,inputOrganisationName, rag);
 
                 setConversation(prevConversation =>
                     prevConversation.map((item, index) =>
