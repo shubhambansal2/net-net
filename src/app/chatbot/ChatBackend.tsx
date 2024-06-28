@@ -7,29 +7,37 @@ interface resp {
 
 }
 
-export default async function ChatBackend(input: string, sessionId: string, industry: string | null, role: string | null, rag: boolean | false) {
+export default async function ChatBackend(input: string, sessionId: string, industry: string | null, role: string | null, botname: string | null, companyname: string | null, rag: boolean | false) {
     try {
 
         // Prepare the payload with mandatory fields
-        const payload: { text: string, session_id: string, industry?: string, role?: string , is_rag?: number} = {
+        const payload: { text: string, session_id: string, industry?: string, role?: string , botname?: string, companyname?: string , is_rag?: number} = {
             text: input,
             session_id: sessionId
         };
 
+        
+        if (industry) {
+            payload.industry = industry;
+            if (role) {
+                payload.role = role;
+            } else {
+                payload.role = "Customer Support";
+            }
+            if (botname) {
+                payload.botname = botname;
+            }
+            if (companyname) {
+                payload.companyname = companyname;
+            }
+        } else {
+            payload.industry = '';
+            payload.role = '';
+            payload.botname = '';
+            payload.companyname = '';
+        }
         if (rag) {
             payload.is_rag = 1;
-        } else {
-            if (industry) {
-                payload.industry = industry;
-                if (role) {
-                    payload.role = role;
-                } else {
-                    payload.role = "Customer Support";
-                }
-            } else {
-                payload.industry = '';
-                payload.role = '';
-            }
         }
 
       // Make a POST request to your Flask app on Heroku
