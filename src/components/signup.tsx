@@ -157,7 +157,7 @@ export function SignupFormDemo() {
                     <BottomGradient/>
                 </a>
 
-                <a href="https://www.linkedin.com/company/neuraledge-ai/" target="_blank" rel="noopener noreferrer"
+                <a href="https://www.linkedin.com/company/blueberry-ai-co/" target="_blank" rel="noopener noreferrer"
                    className="relative group/btn flex space-x-2 items-center px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)] justify-center">
                     <IconBrandLinkedin className="h-4 w-4 text-neutral-800 dark:text-neutral-300"/>
                     <span className="text-neutral-700 dark:text-neutral-300 text-sm">

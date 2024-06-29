@@ -14,7 +14,7 @@ function Footer() {
                     <h2 className="text-white text-lg font-semibold mb-4">Follow Us</h2>
                     <div className="flex space-x-4">
                         <a
-                            href="https://www.linkedin.com/company/neuraledge-ai/"
+                            href="https://www.linkedin.com/company/blueberry-ai-co/"
                             className="hover:text-white transition-colors duration-300"
                             target="_blank"
                             rel="noopener noreferrer"
@@ -22,17 +22,17 @@ function Footer() {
                             Linkedin
                         </a>
                         <a
-                            href="#"
+                            href="https://www.fiverr.com/aiblueberry"
                             className="hover:text-white transition-colors duration-300"
                         >
                             Fiverr
                         </a>
-                        <a
+                        {/* <a
                             href="#"
                             className="hover:text-white transition-colors duration-300"
                         >
                             Upwork
-                        </a>
+                        </a> */}
                     </div>
                 </div>
                 <div>
