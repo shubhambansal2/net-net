@@ -44,7 +44,7 @@ const loadingStates = [
 const Temp: React.FC<ChatProps> = ({industry}) => {
     const [inputText, setInputText] = useState('');
     const [loading, setLoading] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
     const [conversation, setConversation] = useState<{
         question: string,
         answer: string | null,
@@ -73,26 +73,33 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
     const [websiteURLState, setWebsiteURLState] = useState(false);
     // const location = useLocation();
     const inputWebsiteURL = useSelector((state: RootState) => state.chatbot.websiteURL);
-
-
+    // const [inputWebsiteURL, setInputWebsiteURL] = useState(useSelector((state: RootState) => state.chatbot.websiteURL));
 
     useEffect(() => {
         // Reset all states here
+        // window.location.href = '/chatbot';
         setInputText('');
-        setIsLoading(false);
+        // setIsLoading(false);
         setConversation([]);
-        // @ts-ignore
-        setSelectedIndustry(industry);
-        setRoles([]);
         setSelectedRole('Customer Support');
         setShowCards(true);
         setIsSubmittingFromCard(false);
-
+        setManualChatbot(false);
+        setUploadEmbeddings(false);
+        setWebsiteURLState(false);
+        setIsFormOpen(false);
+        setIsFormVisible(true);
+        setIsStateUpdated(false);
+        setTitleAndRole('Welcome to Blueberry AI Chatbot');
+        // setIsFormSubmitted(false);
+        setIsMobile(typeof window !== 'undefined' && window.innerWidth <= 767);
+        // setInputWebsiteURL(null);
         // If you have any cleanup to do, return a function from here
         return () => {
             // Cleanup code here
+            setTitleAndRole('Welcome to Blueberry AI Chatbot');
         };
-    }, []);
+    }, []); // Empty dependency array means this effect runs once on mount and cleanup on unmount
 
     useEffect(() => {
         if (inputValue) {
@@ -143,7 +150,8 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
             } catch (error) {
                 console.error('Error fetching chatbot data:', error);
             } finally {
-                setIsLoading(false);
+                // setIsLoading(false);
+                setLoading(false);
             }
         };
 
@@ -186,7 +194,7 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
             ]);
         }
 
-        setIsLoading(true);
+        // setIsLoading(true);
         setShowCards(false);
         setInputText('');
 
@@ -200,11 +208,11 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
                 const response = await UploadEmbeddings(inputWebsiteURL);
                 console.log("Embedding response: ", response);
                 console.log("Completed with embedding uploads");
-                setLoading(false);
+                // setLoading(false);
                 setRag(true);
                 setUploadEmbeddings(false);
             } else {
-                const response = await ChatBackend(inputText, sessionId, selectedIndustry, selectedRole, inputChatbotName,inputOrganisationName, rag);
+                const response = await ChatBackend(inputText, sessionId, selectedIndustry, selectedRole, inputChatbotName, inputOrganisationName, rag);
 
                 setConversation(prevConversation =>
                     prevConversation.map((item, index) =>
@@ -218,7 +226,9 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
         } catch (error) {
             console.error("Error fetching response:", error);
         } finally {
-            setIsLoading(false);
+            // setIsLoading(false);
+            setLoading(false);
+            // setIsFormSubmitted(false);
         }
     };
 
@@ -278,20 +288,22 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
             setTimeout(() => {
                 setLoading(false);
                 console.log("Loading set to false");
-            }, 6000);
+            }, 5000);
             getMessage();
             setManualChatbot(true);
             console.log("Running Form code...");
             setSelectedIndustry(inputIndustry);
             setSelectedRole(inputSelectedRole);
+            // setLoading(false);
         }
-    }, [inputIndustry, inputSelectedRole, inputOrganisationName, inputChatbotName, selectedIndustry, selectedRole]);
+    }, [inputIndustry, inputSelectedRole, inputOrganisationName, inputChatbotName]);
 
     // Website Embeddings upload
     useEffect(() => {
         if (inputWebsiteURL) {
             setUploadEmbeddings(true);
             setWebsiteURLState(true);
+            // setLoading(true);
             console.log("Running website hook");
         }
     }, [inputWebsiteURL]);
@@ -311,7 +323,7 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
         const handleResize = () => {
             setIsMobile(typeof window !== 'undefined' && window.innerWidth <= 767);
         };
-
+        setLoading(false);
         window.addEventListener('resize', handleResize);
 
         // Cleanup function to remove the event listener when the component unmounts
@@ -326,6 +338,11 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
         setIsFormOpen(!isFormOpen);
     };
 
+    // const handleFormSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
+    //     if (event) event.preventDefault();
+    //     // setIsFormSubmitted(true);
+    // };
+
     return (
         <div className="flex-col h-screen lg:flex lg:flex-row">
             <div className="custom-bot-form-button">
@@ -335,16 +352,16 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
                             <button onClick={toggleForm}>
                                 {isFormOpen ? 'Close Custombotform' : 'Open Custombotform'}
                             </button>
-                            {isFormOpen && <Custombotform />}
+                            {isFormOpen && <Custombotform/>}
                         </div>
                     </>
                 ) : (
-                    <Custombotform />
+                    <Custombotform/>
                 )}
             </div>
             {/* Main Content (div2) */}
             <div className="chatbot-component flex flex-col w-4/5 px-36">
-                <Loader loadingStates={loadingStates} loading={loading} duration={2000} loop={false}/>
+                {<Loader loadingStates={loadingStates} loading={loading} duration={1500} loop={false}/>}
                 <div className="title-info my-20 bg-blue-200 text-center justify-center py-2">
                     <p>
                         {titleAndRole}
@@ -363,7 +380,7 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
                                     {/* Replace with your actual logo image */}
                                     <Image src={IconLogo} alt=""/>
                                 </div>
-                                <div className={`answer rounded ${item.isTyping ? 'typewriter' : ' '}`}>
+                                <div className={`answer ${item.isTyping ? 'typewriter' : ' '}`}>
                                     {item.isTyping ? (
                                         <span className="typing">...</span>
                                     ) : (

@@ -25,26 +25,33 @@
 /*    }*/
 /*}*/
 
-/*@keyframes typewriter {*/
-/*    from { width: 0; }*/
-/*    to { width: 100%; }*/
-/*}*/
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
 
 @keyframes blinkCursor {
-    from, to { border-color: transparent; }
-    50% { border-color: black; }
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: black;
+    }
 }
 
 .typewriter {
     display: inline-block;
     overflow: hidden; /* Ensures the content is clipped */
-    border-right: .15em solid black; /* Cursor effect */
+    border-right: .15em solid black; /* The typewriter cursor */
+
     white-space: nowrap; /* Prevents text from wrapping */
-    margin: 0 auto; /* Keeps it centered */
+    /*margin: 0 auto; !* Keeps it centered *!*/
     letter-spacing: .15em; /* Adjust spacing */
-    animation:
-            typewriter 4s steps(44) 1s 1 normal both,
-            blinkCursor 500ms steps(44) infinite normal;
+    animation: /*typewriter 4s steps(44) 1s 1 normal both,*/ blinkCursor 500ms steps(44) infinite normal;
 }
 
 .chatbot-page {
@@ -87,7 +94,6 @@
         margin: 2vh;
     }
 }
-
 
 
 .custom-bot-form-button {
