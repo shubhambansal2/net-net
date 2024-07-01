@@ -9,9 +9,9 @@ import Image from "next/image";
 import '@/components/header/style.css';
 
 const industries = [
-    {name: "Finance", query: "finance"},
-    {name: "Healthcare", query: "healthcare"},
-    {name: "Technology", query: "technology"}
+    {name: "Finance", query: "Finance"},
+    {name: "Healthcare", query: "Healthcare"},
+    {name: "Technology", query: "Technology"}
 ];
 
 const solutions = [
