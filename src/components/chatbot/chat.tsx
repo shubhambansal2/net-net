@@ -4,6 +4,7 @@ import Image from "next/image";
 import IconLogo from '@/../public/logo3.svg';
 import TypewriterEffect from './typewriter';
 import Custombotform from "@/components/custombotform";
+import {Button} from "@/components/ui/moving-border";
 import {MultiStepLoader as Loader} from "@/components/ui/multi-step-loader";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store";
@@ -228,6 +229,7 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
         } finally {
             // setIsLoading(false);
             setLoading(false);
+            toggleForm();
             // setIsFormSubmitted(false);
         }
     };
@@ -267,9 +269,9 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
     const getMessage = () => {
         console.log("Running getMessage");
         if (industry) {
-            setTitleAndRole(`Welcome to ${industry} chatbot`);
+            setTitleAndRole(`Welcome to Blueberry AI Chatbot specially designed for the ${industry} industry`);
         } else if (inputIndustry && inputSelectedRole && inputChatbotName && inputOrganisationName) {
-            setTitleAndRole(`Introducing ${inputChatbotName}, your dedicated virtual assistant designed specifically for the ${inputIndustry} industry. Whether you're a ${inputSelectedRole} seeking information or assistance, ${inputChatbotName} is here to enhance your experience and streamline your \n interactions.`);
+            setTitleAndRole(`Introducing ${inputChatbotName}, your dedicated virtual assistant designed specifically for the ${inputIndustry} industry. ${inputChatbotName} is specialised for assistance in ${inputSelectedRole} and is here to enhance your experience and streamline your interactions.`);
             // setTitleAndRole(`This chatbot is designed for the ${inputIndustry} industry with the role of ${inputSelectedRole}, named ${inputChatbotName}, for the organisation ${inputOrganisationName}.`);
         } else {
             setTitleAndRole('Welcome to Blueberry AI Chatbot');
@@ -284,6 +286,7 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
     useEffect(() => {
         if (inputIndustry && inputSelectedRole && inputChatbotName && inputOrganisationName) {
             setLoading(true);
+            toggleForm();
             setConversation([]);
             setTimeout(() => {
                 setLoading(false);
@@ -345,24 +348,34 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
 
     return (
         <div className="flex-col h-screen lg:flex lg:flex-row">
-            <div className="custom-bot-form-button">
-                {isMobile ? (
-                    <>
+            
+                   {isMobile ? (
+                    <>   
+                        
                         <div className="flex flex-col justify-between mt-20">
-                            <button onClick={toggleForm}>
-                                {isFormOpen ? 'Close Custombotform' : 'Open Custombotform'}
+                          
+                            <button onClick={toggleForm} className="ml-2 mr-2 px-20 py-2 items-center justify-center mb-10 rounded-md border border-black bg-white text-black text-sm hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] transition duration-200">
+                            <div className="flex flex-row items-center justify-center">
+                            {isFormOpen ? 'Close Form': 'Create your Custom Chatbot'}
+                            {isFormOpen ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 18.75 7.5-7.5 7.5 7.5" /><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 7.5-7.5 7.5 7.5" /></svg>
+                                        : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5" /></svg>}
+                            </div>
                             </button>
+                            <div className="custom-bot-form-button lg:ml-10">
                             {isFormOpen && <Custombotform/>}
+                            </div>
                         </div>
                     </>
                 ) : (
+                    <div className="custom-bot-form-button lg:ml-10">
                     <Custombotform/>
+                    </div>
                 )}
-            </div>
+            
             {/* Main Content (div2) */}
             <div className="chatbot-component flex flex-col w-4/5 px-36">
                 {<Loader loadingStates={loadingStates} loading={loading} duration={1500} loop={false}/>}
-                <div className="title-info my-20 bg-blue-200 text-center justify-center py-2">
+                <div className="title-info my-20 rounded-md bg-gradient-to-r from-blue-300 to-blue-700 text-center text-white font-bold justify-center py-2">
                     <p>
                         {titleAndRole}
                     </p>
@@ -395,8 +408,8 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
                     {showCards && (
                         <div className="w-full justify-center">
                             {manualChatbot ? (
-                                <div className="bg-blue-200 p-4 rounded-lg shadow-md text-center">
-                                    Chatbot is ready, you can chat.
+                                <div className="rounded-md bg-blue-300 text-center text-white font-bold justify-center py-2">
+                                    Your Custom Bot is now ready.
                                 </div>
                             ) : (
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

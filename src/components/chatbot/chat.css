@@ -104,8 +104,8 @@
 }
 
 .custom-bot-form-button button {
-    padding: 12px 24px;
-    background-color: #4a90e2; /* Blue color */
+    padding: 12px;
+    background-color: #41566b; /* Blue color */
     color: white;
     border: none;
     border-radius: 8px;
@@ -115,5 +115,5 @@
 }
 
 .custom-bot-form-button button:hover {
-    background-color: #357dbf; /* Darker shade of blue on hover */
+    background-color: #546e88; /* Darker shade of blue on hover */
 }
