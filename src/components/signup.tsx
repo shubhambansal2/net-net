@@ -15,6 +15,7 @@ export function SignupFormDemo() {
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        const currentTarget = e.currentTarget;
         const target = e.target as typeof e.target & {
             companyname: {
                 value: string
@@ -47,11 +48,16 @@ export function SignupFormDemo() {
                 requirement: target.requirement.value,
             }),
         });
+
         const result = await response.json();
+        console.log(result);
         if (result.success) {
             console.log(result);
             setModalIsOpen(true);
-            e.currentTarget.reset();
+            // e.currentTarget.reset();
+            if(currentTarget) {
+                currentTarget.reset();
+            }
         }
     }
 
