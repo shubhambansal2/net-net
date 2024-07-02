@@ -27,6 +27,11 @@ function Navbar() {
         setMenuOpen(!menuOpen);
     };
 
+    const closeMenu = () => {
+        setMenuOpen(false);
+    };
+
+
     return (
         <header className="fixed flex flex-col top-0 inset-x-0 lg:flex-row bg-white z-50 py-1 h-16 shadow-md">
             <div className="flex-1 flex justify-between items-center">
@@ -41,36 +46,43 @@ function Navbar() {
                     </button>
                 </div>
             </div>
-            <div className={`flex-grow ${menuOpen ? 'block' : 'hidden'} lg:flex lg:items-center lg:justify-center px-4`}>
+            <div className={`nav-menu flex-grow ${menuOpen ? 'active' : ''} lg:flex lg:items-center lg:justify-center px-4`}>
+                {menuOpen && (
+                    <button onClick={closeMenu} className="close-button">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                )}
                 <Menu setActive={setActive}>
                     <div className="flex flex-col md:flex-row md:space-x-16 md:space-y-0">
-                        <div className="relative group">
+                        <div className="relative group menu-item">
                             <MenuItem setActive={setActive} active={active} item="Industry" />
                             <div className="absolute left-0 top-full hidden group-hover:flex flex-col bg-white shadow-md p-4 z-10 space-y-4 text-sm">
                                 {industries.map(industry => (
-                                    <HoveredLink key={industry.query} href={{pathname: "/chatbot", query: {industry: industry.query}}}>
+                                    <HoveredLink key={industry.query} href={{pathname: "/chatbot", query: {industry: industry.query}}} onClick={closeMenu}>
                                         {industry.name}
                                     </HoveredLink>
                                 ))}
                             </div>
                         </div>
-                        <div className="relative group">
+                        <div className="relative group menu-item">
                             <MenuItem setActive={setActive} active={active} item="Solutions" />
                             <div className="absolute left-0 top-full hidden group-hover:flex flex-col bg-white shadow-md p-4 z-10 space-y-4 text-sm">
                                 {solutions.map(solution => (
-                                    <HoveredLink key={solution.path} href={solution.path}>
+                                    <HoveredLink key={solution.path} href={solution.path} onClick={closeMenu}>
                                         {solution.name}
                                     </HoveredLink>
                                 ))}
                             </div>
                         </div>
-                        <Link href="/blog">
+                        <Link href="/blog" onClick={closeMenu} className="menu-item">
                             <MenuItem setActive={setActive} active={active} item="Blog" />
                         </Link>
-                        <Link href="/aboutus">
+                        <Link href="/aboutus" onClick={closeMenu} className="menu-item">
                             <MenuItem setActive={setActive} active={active} item="About Us" />
                         </Link>
-                        <Link href="/contactus">
+                        <Link href="/contactus" onClick={closeMenu} className="menu-item">
                             <MenuItem setActive={setActive} active={active} item="Contact Us" />
                         </Link>
                     </div>

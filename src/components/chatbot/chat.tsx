@@ -10,6 +10,8 @@ import {useSelector} from "react-redux";
 import {RootState} from "@/store";
 import UploadEmbeddings from "@/app/chatbot/UploadEmbeddings";
 import './chat.css';
+import {setInputValue} from "@/store/slices/inputValueSlice";
+import { useDispatch } from 'react-redux';
 
 // Generate a new session_id on page load
 let sessionId = 'A' + Math.floor(Math.random() * 1000000);
@@ -43,6 +45,7 @@ const loadingStates = [
 ];
 
 const Temp: React.FC<ChatProps> = ({industry}) => {
+    const dispatch = useDispatch();
     const [inputText, setInputText] = useState('');
     const [loading, setLoading] = useState(false);
     // const [isLoading, setIsLoading] = useState(false);
@@ -76,6 +79,7 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
     const inputWebsiteURL = useSelector((state: RootState) => state.chatbot.websiteURL);
     // const [inputWebsiteURL, setInputWebsiteURL] = useState(useSelector((state: RootState) => state.chatbot.websiteURL));
 
+
     useEffect(() => {
         // Reset all states here
         // window.location.href = '/chatbot';
@@ -102,11 +106,12 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
         };
     }, []); // Empty dependency array means this effect runs once on mount and cleanup on unmount
 
-    useEffect(() => {
+        useEffect(() => {
         if (inputValue) {
             console.log("EXECUTING INPUT VALUE...");
             setInputText(inputValue);
             setIsStateUpdated(true); // Indicate that the state update is triggered
+            // setConversation([]);
         }
     }, [inputValue]);
 
@@ -114,9 +119,9 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
         if (isStateUpdated) {
             handleSubmit(); // Call handleSubmit once state is updated
             setIsStateUpdated(false); // Reset the state update indicator
+            dispatch(setInputValue(''));
         }
     }, [isStateUpdated]);
-
 
     useEffect(() => {
         console.log("Industry : ", industry);
