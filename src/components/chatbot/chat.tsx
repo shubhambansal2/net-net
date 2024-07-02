@@ -229,7 +229,6 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
         } finally {
             // setIsLoading(false);
             setLoading(false);
-            toggleForm();
             // setIsFormSubmitted(false);
         }
     };
@@ -286,7 +285,7 @@ const Temp: React.FC<ChatProps> = ({industry}) => {
     useEffect(() => {
         if (inputIndustry && inputSelectedRole && inputChatbotName && inputOrganisationName) {
             setLoading(true);
-            toggleForm();
+            setIsFormOpen(false);
             setConversation([]);
             setTimeout(() => {
                 setLoading(false);
