@@ -41,7 +41,7 @@ export default async function ChatBackend(input: string, sessionId: string, indu
         }
 
       // Make a POST request to your Flask app on Heroku
-      const response = await axios.post('https://desolate-bastion-55476-3d3016c3fa1a.herokuapp.com/chat', payload);
+      const response = await axios.post('https://fresh-chelsey-blueberryai-923a4757.koyeb.app/chat', payload);
       // Return the response from your Flask app
       // @ts-ignore
       return response.data.response;

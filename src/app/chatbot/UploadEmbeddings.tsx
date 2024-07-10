@@ -7,7 +7,7 @@ export default async function UploadEmbeddings(websiteURL: string) {
         const payload: { url: string} = {
             url: websiteURL,
         };
-        const response = await axios.post('https://desolate-bastion-55476-3d3016c3fa1a.herokuapp.com/uploadembeddingsurl', payload);
+        const response = await axios.post('https://fresh-chelsey-blueberryai-923a4757.koyeb.app/uploadembeddingsurl', payload);
         return response.data.response;
     } catch (error) {
         console.log(error);
