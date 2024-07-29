@@ -14,6 +14,7 @@ import { setInputValue } from "@/store/slices/inputValueSlice";
 import { setInputIndustryFromNav } from "@/store/slices/inputIndustryFromNav";
 import { useDispatch } from "react-redux";
 import { setInputIndustry, setInputChatbotName, setInputOrganisationName, setInputWebsiteURL, setInputRole } from "@/store/slices/chatbotSlice";
+import { update } from "lodash";
 
 // Generate a new session_id on page load
 let sessionId = "A" + Math.floor(Math.random() * 1000000);
@@ -246,6 +247,7 @@ const Temp = () => {
       console.log("Running Form code...");
       setSelectedIndustry(inputIndustry);
       setSelectedRole(inputSelectedRole);
+      updateSessionId();
       // setLoading(false);
     }
   }, [

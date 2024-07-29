@@ -38,13 +38,10 @@ export default function RootLayout({
             gtag('config', 'G-SDF5CRC3VJ');
            `
             }
-        </Script>
+        </Script>     
     </head>
       <body>
-     
-        {/*<div className={cn("relative w-full flex flex-col items-center justify-center", fontSans.variable) }>*/}
             <Navbar/>
-        {/*</div>*/}
         {children}
       
       </body>

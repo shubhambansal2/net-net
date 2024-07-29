@@ -1,16 +1,16 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface InputIndustryState {
+interface InputIndustryFromNavState {
     value: string;
 }
 
-const initialState: InputIndustryState = {
+const initialState: InputIndustryFromNavState = {
     value: '',
 };
 
-const inputIndustrySlice = createSlice({
-    name: 'inputIndustry',
+const inputIndustryFromNavSlice = createSlice({
+    name: 'inputIndustryFromNav',
     initialState,
     reducers: {
         setInputIndustryFromNav: (state, action: PayloadAction<string>) => {
@@ -19,5 +19,5 @@ const inputIndustrySlice = createSlice({
     },
 });
 
-export const { setInputIndustryFromNav } = inputIndustrySlice.actions;
-export default inputIndustrySlice.reducer;
+export const { setInputIndustryFromNav } = inputIndustryFromNavSlice.actions;
+export default inputIndustryFromNavSlice.reducer;
