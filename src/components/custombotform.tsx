@@ -1,16 +1,16 @@
 "use client";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/utils/cn";
+import React, {useEffect, useState} from "react";
+import {useDispatch} from "react-redux";
+import {Label} from "@/components/ui/label";
+import {Input} from "@/components/ui/input";
+import {cn} from "@/utils/cn";
 import {
   setInputChatbotName,
   setInputIndustry,
   setInputOrganisationName,
-  setInputRole, setInputWebsiteURL,
+  setInputRole,
+  setInputWebsiteURL,
 } from "@/store/slices/chatbotSlice";
-import {setInputValue} from "@/store/slices/inputValueSlice";
 import '@/components/chatbot/chat.css';
 
 export function Custombotform() {
@@ -26,6 +26,16 @@ export function Custombotform() {
   const [isWebsiteEnabled, setIsWebsiteEnabled] = useState(false);
   const [websiteUrl, setWebsiteUrl] = useState('');
   const [showWarning, setShowWarning] = useState(false);
+
+  useEffect(() => {
+    if(organisationName.length === 0 && chatbotName.length === 0 && industry.length === 0 && role.length === 0 && websiteUrl.length === 0) {
+      dispatch(setInputOrganisationName(organisationName));
+      dispatch(setInputChatbotName(chatbotName));
+      dispatch(setInputIndustry(industry));
+      dispatch(setInputRole(role));
+      dispatch(setInputWebsiteURL(websiteUrl));
+    }
+  }, [organisationName, chatbotName, industry, role, websiteUrl]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

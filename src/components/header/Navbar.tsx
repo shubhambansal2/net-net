@@ -6,7 +6,9 @@ import { HoveredLink, Menu, MenuItem } from "@/components/ui/navbar-menu";
 import Link from "next/link";
 import blueberryLogo from '@/../public/logo2.svg';
 import Image from "next/image";
+import {useDispatch} from "react-redux";
 import '@/components/header/style.css';
+import { setInputIndustryFromNav } from "@/store/slices/inputIndustryFromNav";
 
 const industries = [
     {name: "Finance", query: "Finance"},
@@ -22,6 +24,7 @@ const solutions = [
 function Navbar() {
     const [active, setActive] = useState<string | null>('');
     const [menuOpen, setMenuOpen] = useState(false);
+    const dispatch = useDispatch();
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
@@ -29,6 +32,11 @@ function Navbar() {
 
     const closeMenu = () => {
         setMenuOpen(false);
+    };
+
+    const closeIndustryMenu = (industry: string) => {
+        setMenuOpen(false);
+        dispatch(setInputIndustryFromNav(industry));
     };
 
 
@@ -60,7 +68,7 @@ function Navbar() {
                             <MenuItem setActive={setActive} active={active} item="Industry" />
                             <div className="absolute left-0 top-full hidden group-hover:flex flex-col bg-white shadow-md p-4 z-10 space-y-4 text-sm">
                                 {industries.map(industry => (
-                                    <HoveredLink key={industry.query} href={{pathname: "/chatbot", query: {industry: industry.query}}} onClick={closeMenu}>
+                                    <HoveredLink key={industry.query} href={{pathname: "/chatbot", query: {industry: industry.query}}} onClick={() => closeIndustryMenu(industry.query)}>
                                         {industry.name}
                                     </HoveredLink>
                                 ))}

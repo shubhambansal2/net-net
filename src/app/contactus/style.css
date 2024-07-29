@@ -3,3 +3,8 @@
     align-items: center;
     margin-top: 7vh;
 }
+
+.contact-parent {
+    height: 100vh;
+    /* background-color: lightblue; */
+}
