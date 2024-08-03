@@ -47,7 +47,7 @@ const loadingStates = [
   },
 ];
 
-const Temp = () => {
+const Chat = () => {
   const dispatch = useDispatch();
   const [inputText, setInputText] = useState("");
   const [loading, setLoading] = useState(false);
@@ -98,49 +98,25 @@ const Temp = () => {
   );
 
   useEffect(() => {
-    // Reset all states here
-    // setInputText("");
-    // // setIsLoading(false);
-    // setConversation([]);
-    // setSelectedRole("Customer Support");
-    // setShowCards(true);
-    // setIsSubmittingFromCard(false);
-    // setManualChatbot(false);
-    // setUploadEmbeddings(false);
-    // setWebsiteURLState(false);
-    // setIsFormOpen(false);
-    // setIsFormVisible(true);
-    // setIsStateUpdated(false);
-    // setTitleAndRole("Welcome to Blueberry AI Chatbot");
-    // setSelectedIndustry('');
-    // setIsMobile(typeof window !== "undefined" && window.innerWidth <= 767);
-    // getMessage();
-    // updateSessionId();
-    // // setInputWebsiteURL(null);
-    // // If you have any cleanup to do, return a function from here
-    // return () => {
-    //   // Cleanup code here
-    //   setTitleAndRole("Welcome to Blueberry AI Chatbot");
-    // };
-  }, []); // Empty dependency array means this effect runs once on mount and cleanup on unmount
-
-  useEffect(() => {
-    if (inputValue) {
+    if (inputValue != '') {
       console.log("EXECUTING INPUT VALUE...");
+      setSelectedIndustry('');
+      setSelectedRole('');
       dispatch(setInputIndustryFromNav(''));
       dispatch(setInputOrganisationName(''));
       dispatch(setInputChatbotName(''));
       dispatch(setInputIndustry(''));
       dispatch(setInputRole(''));
       dispatch(setInputWebsiteURL(''));
-      setSelectedIndustry('');
-      setSelectedRole('');
       getMessage();
       setInputText(inputValue);
     //   setIsStateUpdated(true); // Indicate that the state update is triggered
       // setConversation([]);
        // Use a timeout to ensure state updates are batched
-       setTimeout(() => {
+      setTimeout(() => {
+        console.log("selected insutry is : ", selectedIndustry);
+        console.log("selected inpit insutry is : ", inputIndustryFromNav);
+        setSelectedIndustry('');
         setIsStateUpdated(true); // Indicate that the state update is triggered
       }, 0);
     }
@@ -148,16 +124,17 @@ const Temp = () => {
 
   useEffect(() => {
     if (isStateUpdated) {
+      console.log("Set select industry is : " + selectedIndustry);
+      console.log("selecteds\  inpit insutry is : ", inputIndustryFromNav);
+      console.log("Executing test for homepage");
       handleSubmit();
       setIsStateUpdated(false);
       dispatch(setInputValue(""));
     }
-  }, [isStateUpdated]);
+  }, [isStateUpdated, selectedIndustry, inputIndustryFromNav]);
 
   useEffect(() => {
     console.log("Industry : ", inputIndustryFromNav);
-
-    // @ts-ignore
     
     // setSelectedRole('default');
     setConversation([]);
@@ -212,10 +189,14 @@ const Temp = () => {
   }, [conversation]);
 
   useEffect(() => {
-    console.log("Selected Industry is : ", inputIndustryFromNav);
-    getMessage();
-    updateSessionId();
-    if(inputIndustryFromNav != '') setSelectedIndustry(inputIndustryFromNav);
+   
+    if(inputIndustryFromNav != '') {
+      console.log("Selected Industry on change of  : ", inputIndustryFromNav);
+      getMessage();
+      updateSessionId();
+      setSelectedIndustry(inputIndustryFromNav);
+    }
+      
   }, [inputIndustryFromNav]);
 
   useEffect(() => {
@@ -228,13 +209,14 @@ const Temp = () => {
 
   // Get Custom title based on chatbot form inputs
   useEffect(() => {
-    dispatch(setInputIndustryFromNav(''));
+    
     if (
       inputIndustry &&
       inputSelectedRole &&
       inputChatbotName &&
       inputOrganisationName
     ) {
+      dispatch(setInputIndustryFromNav(''));
       setLoading(true);
       setIsFormOpen(false);
       setConversation([]);
@@ -600,4 +582,4 @@ const Temp = () => {
   );
 };
 
-export default Temp;
+export default Chat;

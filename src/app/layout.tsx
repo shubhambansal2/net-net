@@ -38,7 +38,7 @@ export default function RootLayout({
             gtag('config', 'G-SDF5CRC3VJ');
            `
             }
-        </Script>     
+        </Script>
     </head>
       <body>
             <Navbar/>
