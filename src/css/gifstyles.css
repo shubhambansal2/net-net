@@ -1,0 +1,4 @@
+.play-once {
+    animation-iteration-count: 1 !important;
+    -webkit-animation-iteration-count: 1 !important;
+  }

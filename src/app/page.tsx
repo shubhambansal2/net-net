@@ -13,6 +13,10 @@ import Highlight1 from '@/components/highlighter1';
 import Highlight2 from '@/components/highlighter2';
 import {Provider} from "react-redux";
 import {store} from "@/store";
+import Image from 'next/image';
+import HomePageElement1 from '@/../public/HomePageElement1.gif';
+import '../css/gifstyles.css';
+
 
 export default function Home() {
     return (
@@ -20,7 +24,7 @@ export default function Home() {
             <div className="homepage-theme">
                 <Provider store={store}>
                     <Head/>
-                    <AuroraBackground className="homepage-theme">
+                    {/* <AuroraBackground className="homepage-theme"> */}
                     <motion.div
                         initial={{opacity: 0.0, y: 40}}
                         whileInView={{opacity: 1, y: 0}}
@@ -31,11 +35,17 @@ export default function Home() {
                         }}
                         className="relative flex flex-col gap-4 items-center justify-center">
                         <main className="min-h-screen antialiased bg-grid-grey/[0.02] z-10">
+                           
                             <div className="flex flex-col justify-center items-center mt-20 sm:mt-5  min-h-[40rem]">
+                            <div className="flex flex-row">
                                 <div className="flex flex-col space-y-4  mt-20 mb-40">
                                     <Chatbothome/>
                                     <ConversationalCommerce/>
                                 </div>
+                                {/* <div>
+                                <Image src={HomePageElement1} alt="Fast and Prompt chatbots"/>
+                                </div> */}
+                            </div>    
                                 <div className=" flex flex-col items-center justify-center mb-40">
                                     <div
                                         className="text-md sm:text-lg md:text-lg lg:text:xl xl:text-xl text-neutral-600 dark:text-neutral-400">
@@ -61,7 +71,7 @@ export default function Home() {
                             </div>
                         </main>
                     </motion.div>
-                    </AuroraBackground>
+                    {/* </AuroraBackground> */}
                     <Footer/>
                 </Provider>
             </div>
