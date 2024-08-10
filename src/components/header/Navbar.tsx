@@ -11,9 +11,14 @@ import '@/components/header/style.css';
 import { setInputIndustryFromNav } from "@/store/slices/inputIndustryFromNav";
 
 const industries = [
-    {name: "Finance", query: "Finance"},
+    {name: "E-commerce", query: "E-commerce"},
+    {name: "Banking", query: "Banking"},
+    {name: "Real Estate", query: "RealEstate"},
     {name: "Healthcare", query: "Healthcare"},
-    {name: "Technology", query: "Technology"}
+    {name: "Insurance", query: "Insurance"},
+    {name: "Logistics", query: "Logistics"},
+    {name: "EdTech", query: "EdTech"},
+    {name: "FoodTech", query: "FoodTech"}
 ];
 
 const solutions = [

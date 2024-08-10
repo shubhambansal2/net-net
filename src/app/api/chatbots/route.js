@@ -8,6 +8,7 @@ export async function GET() {
 
     try {
         const chatbots = await Chatbot.find({}); // Fetch all chatbots
+        console.log('Chatbots fetched:', chatbots);
         return NextResponse.json(chatbots);
     } catch (error) {
         console.error('Error fetching chatbot data:', error);
