@@ -44,9 +44,16 @@ export default async function ChatBackend(input: string, sessionId: string, indu
       const response = await axios.post('https://desolate-bastion-55476-3d3016c3fa1a.herokuapp.com/chat', payload);
       // Return the response from your Flask app
       // @ts-ignore
-      return response.data.response;
+      const data: ResponseData = response.data
+      // Check if the response contains the expected data
+    if (data && data.response) {
+        console.log(data);
+        return data.response;
+      } else {
+        return "Some issue occurred, please retry again.";
+      }
     } catch (error) {
       console.log(error);
-      throw error;
+      return "Some issue occurred, please retry again.";
     }
 }

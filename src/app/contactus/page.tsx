@@ -3,7 +3,7 @@ import React from "react";
 import SignupFormDemo from "@/components/signup";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { motion } from "framer-motion";
-
+import '@/../src/app/contactus/style.css';
 
 export default function Signup() {
   return (
