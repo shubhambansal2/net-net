@@ -1,4 +1,4 @@
-"use client";
+'use client'
 // Navbar.js
 
 import React, { useState } from "react";
@@ -83,7 +83,7 @@ function Navbar() {
                             <MenuItem setActive={setActive} active={active} item="Solutions" />
                             <div className="absolute left-0 top-full hidden group-hover:flex flex-col bg-white shadow-md p-4 z-10 space-y-4 text-sm">
                                 {solutions.map(solution => (
-                                    <HoveredLink key={solution.path} href={solution.path} onClick={closeMenu}>
+                                    <HoveredLink key={solution.path} href={solution.path} onClick={() => {window.location.href = '/chatbot'; closeMenu;}}>
                                         {solution.name}
                                     </HoveredLink>
                                 ))}
