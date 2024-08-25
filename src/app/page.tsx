@@ -13,6 +13,7 @@ import Highlight1 from '@/components/highlighter1';
 import Highlight2 from '@/components/highlighter2';
 import {Provider} from "react-redux";
 import {store} from "@/store";
+import ChatbotEmbed from '@/components/embedded_chat'
 import Image from 'next/image';
 import HomePageElement1 from '@/../public/HomePageElement1.gif';
 import '../css/gifstyles.css';
@@ -42,6 +43,7 @@ export default function Home() {
                                     <Chatbothome/>
                                     <ConversationalCommerce/>
                                 </div>
+                                
                                 {/* <div>
                                 <Image src={HomePageElement1} alt="Fast and Prompt chatbots"/>
                                 </div> */}
