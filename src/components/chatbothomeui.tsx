@@ -38,7 +38,7 @@ export function Chatbothome() {
                     BlueberryAI
                 </h2>
                 <h2 className="mb-10 sm:mb-20 text-xl ml-4 text-center sm:text-5xl dark:text-white text-black">
-                    Anything
+                    Anything New
                 </h2>
             </div>
             <PlaceholdersAndVanishInput
