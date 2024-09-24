@@ -16,7 +16,7 @@ async function dbConnect(): Promise<void> {
     }
 
     try {
-        const db = await mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://admin:k7WQN44KL0Az80yx@dev.qsqpmqh.mongodb.net/blueberryai_db?retryWrites=true&w=majority&appName=dev', {});
+        const db = await mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://shubhampb95:KcGCDmsyLiC2aDYj@cluster0.kwfne.mongodb.net/blueberry_db_nosql?retryWrites=true&w=majority&appName=Cluster0', {});
 
         connection.isConnected = db.connections[0].readyState
         await mongoose.connection.db.admin().command({ ping: 1 });

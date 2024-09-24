@@ -21,6 +21,4 @@ if (!models.chatbots) {
 } else {
     Chatbots = models.chatbots;
 }
-
-
 module.exports = Chatbots;
